@@ -1,0 +1,56 @@
+{% extends basetemplate %}
+{% load i18n %}
+{% block title %} {% trans "Login" %}{% endblock %}
+{% block body %}
+{% if not loggedin %}
+<div id="logindialog" class="uk-child-width-3-4@s" uk-grid>
+    <div><div class="uk-light uk-background-secondary uk-padding">
+    <form action="/main/login" method="post">
+
+
+	    <h2 class="uk-title">{% trans "Login" %}</h2>
+
+            {% csrf_token %}
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon " uk-icon="icon: user"></span>
+                    {{ form.nick }}
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon " uk-icon="icon: lock"></span>
+                    {{ form.passwd }}
+                </div>
+            </div>
+            <div class="uk-margin">
+                <div class="uk-inline">
+                <span  uk-icon="icon: info"></span>
+                    <p>{{ msg }}</p>
+                </div>
+            </div>
+                <div class="uk-text-right uk-margin">
+			<button class="uk-button uk-button-default" type="button">{% trans "Cancel" %}</button>
+		    <button class="uk-button uk-button-primary" type="submit">{% trans "Ok" %}</button>
+                </div>
+    </form>
+    </div></div>
+</div>
+{% else %}
+            <div uk-alert class="uk-padding">
+                <div uk-spinner></div><a class="uk-alert-close" uk-close></a>
+		<h3 class="uk-modal-title">{% trans "Logged in" %}</h3>
+            </div>
+
+{% endif %}
+{% endblock %}
+{% block jsbottom %}
+{% if loggedin %}
+            <script type="text/javascript">
+            setTimeout(function() {
+                location.pathname='{% url "main:controlpanel" %}';
+                },2000);
+            </script>
+{% endif %}
+{% endblock %}

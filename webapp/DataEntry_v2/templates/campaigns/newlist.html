@@ -1,0 +1,52 @@
+{% extends "main/baselogged.html" %}
+{% load i18n %}
+{% block js %}
+<script src="/st/js/jquery.min.js"></script>
+{% endblock %}
+{% block body %}
+<div id="addlistdialog" class="uk-child-width-3-4@s" uk-grid>
+    <div><div class="uk-light uk-background-secondary uk-padding">
+    <form enctype="multipart/form-data" action="/campaigns/lists/new" method="post">
+
+	    <h2 class="uk-title">{% trans "New List" %}</h2>
+            {% csrf_token %}
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <p>{{ helptext }}</p>
+                </div>
+            </div>
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon " uk-icon="icon: file-edit"></span>
+                    {{ listform.name }}
+                </div>
+            </div>
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    {{ listform.file }}
+                </div>
+            </div>
+            <div class="uk-margin">
+                <div class="uk-inline" id="message">
+                </div>
+            </div>
+
+            <div class="uk-text-right uk-margin">
+		    <button class="uk-button uk-button-default" type="button">{% trans "Cancel" %}</button>
+		    <button class="uk-button uk-button-primary" type="submit" id="okbtn">{% trans "Ok" %}</button>
+            </div>
+
+    </form>
+    </div></div>
+</div>
+{% endblock %}
+{% block jsbottom %}
+<script>
+$(document).ready(function(){
+        $('#okbtn').click(function(ev){
+		$("#message").html('<div uk-spinner></div><p>{% trans "Loading... please, wait..." %}</p>');
+    });
+});
+{% if redirect2tasks == True %} location.href="/campaigns/tasks"; {% endif %}
+</script>
+{% endblock %}

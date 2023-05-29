@@ -1,0 +1,14 @@
+{% load i18n %}
+{% for field in fields %}
+    <tr class="fldsbody">
+    <td><a href="#" onclick='javascript:editForm("#addfieldrecord", "#loadfields", "/campaigns/field/{{ campaignid }}/{{ field.fieldNum }}", "#modal-fields", {{ field.fieldNum }});'><span uk-icon="icon: file-edit"></span></a>
+        <a href="#" onclick='javascript:rmField("#addfieldrecord", "#loadfields", "/campaigns/field/rm/{{ campaignid }}/{{ field.fieldNum }}", "#modal-fields", {{ field.fieldNum }});'><span uk-icon="icon: trash"></span></a></td>
+    <td>{{ field.name }}</td>
+    <td>{{ field.type }}</td>
+    <td>{{ field.length }}</td>
+    <td>{{ field.fieldNum }}</td>
+    <td>{{ field.screenNumber }}</td>
+    <td><a href="#" onclick='javascript:propertiesEdit("#propertieslayer", "/campaigns/field/props/{{ campaignid }}/{{ field.fieldNum }}", {{ field.fieldNum }});'><span uk-icon="icon: play"></span></a></td>
+    <td>&nbsp;</td>
+</tr>
+{% endfor %}

@@ -1,0 +1,44 @@
+{% extends "main/baselogged.html" %}
+{% load i18n %}
+{% block js %}
+<script src="/st/js/jquery.min.js"></script>
+{% endblock %}
+{% block body %}
+<div class="uk-section uk-section-muted uk-dark">
+<div  class="uk-container">
+<table id="users_table" class="uk-table uk-table-small uk-table-divider uk-table-responsive uk-table-hover">
+    <thead>
+        <tr>
+            <td>{{ status }}</td>
+            <td>{{ name }}</td>
+            <td>{{ data }}</td>
+        </tr>
+    </thead>
+    <tbody>
+
+    {% for task in tasks %}
+        <tr>
+            <td>{{ task.task }}</td>
+            <td>{{ task.name }}</td>
+            {% if task.data.href == "" %}
+            <td>{{ task.data.text }}</td>
+            {% else %}
+            <td><a href="{{ task.data.href }}">{{ task.data.text }}</a></td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+</div>
+</div>
+{% endblock %}
+{% block jsbottom %}
+<script>
+
+$(document).ready(function(){
+ setTimeout(function(){ location.reload(true); }, 20000);
+});
+
+</script>
+{% endblock %}

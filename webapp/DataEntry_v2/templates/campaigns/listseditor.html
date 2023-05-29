@@ -1,0 +1,46 @@
+{% extends "main/baselogged.html" %}
+{% load i18n %}
+{% block js %}
+<script src="/st/js/jquery.min.js"></script>
+{% endblock %}
+{% block body %}
+<div id="addlistdialog" class="uk-child-width-3-4@s" uk-grid>
+    <div><div class="uk-light uk-background-secondary uk-padding">
+    <form action="/campaigns/lists/{{ url }}" method="post">
+
+	    <h2 class="uk-title">{% trans "New List" %}</h2>
+            {% csrf_token %}
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    {{ listform.name }}
+                </div>
+                <div class="uk-inline">
+                    {{ listform.value }}
+                </div>
+            </div>
+
+            <div class="uk-text-right uk-margin">
+		    <button class="uk-button uk-button-default" type="button">{% trans "Cancel" %}</button>
+		    <button class="uk-button uk-button-primary" type="button">{% trans "Add" %}</button>
+            </div>
+
+    </form>
+<div class="uk-overflow-auto">
+    <table class="uk-table uk-table-small uk-table-divider">
+        <thead>
+            <tr>
+		    <th>{% trans "Code" %}</th>
+		    <th>{% trans "Value" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+    </div></div>
+</div>
+{% endblock %}

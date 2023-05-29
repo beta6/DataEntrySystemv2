@@ -1,0 +1,24 @@
+{% load dict %}
+{% load i18n %}
+<h3 class="uk-card-title">{{ fieldname }}</h3>
+<div  uk-grid><form id="frmaddproperty" method="post" action="/campaigns/field/props/{{ campaignid }}/{{ fieldid }}">{{ properties.property }}<a href="#" class="uk-button uk-button-default  uk-width-1-3" onclick='javascript:addProperty("#frmaddproperty", "#propertieslayer", {{ fieldid }});'>{% trans "Add" %}</a></form></div>
+    <ul uk-accordion>
+    {% for field in fieldsprops %}
+    <li>
+        <a class="uk-accordion-title" href="#">{{ field.property.identifier }} {{ field.property.description }}</a>
+        <div class="uk-accordion-content">
+            <form id="{{ field.property.identifier }}" method="post" action="/campaigns/field/props/edit/{{ campaignid }}/{{ fieldid }}/{{ field.property.identifier }}">
+            <table class="uk-table">
+                <tbody>
+                {% with value=formsProps|hash:field.property.identifier %}
+                {{ value.as_table }}
+                {% endwith %}
+		<tr><td><a href="#" class="uk-button uk-button-default" onclick="javascript:removeProperty('/campaigns/field/props/rm/{{ campaignid }}/{{ fieldid }}/{{ field.property.identifier }}', {{ fieldid }});">{% trans "Remove" %}</a></td><td><a href="#" class="uk-button uk-button-default" onclick="javascript:submitProperty('#{{ field.property.identifier }}');">{% trans "Save" %}</a></td></tr>
+                </tbody>
+            </table>
+            </form>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+

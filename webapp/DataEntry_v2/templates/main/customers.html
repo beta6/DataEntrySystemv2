@@ -1,0 +1,114 @@
+{% extends "main/baselogged.html" %}
+{% load i18n %}
+{% block js %}
+<script src="/st/js/jquery.min.js"></script>
+{% endblock %}
+{% block body %}
+<div class="uk-section uk-section-muted uk-dark">
+<div  class="uk-container">
+<table id="users_table" class="uk-table uk-table-small uk-table-divider uk-table-responsive uk-table-hover">
+    <thead>
+        <tr>
+            <td><a class="uk-button uk-button-default" href="#" uk-icon="icon: plus-circle" id="addrecord"></a></td>
+    {% for field in fields %}
+            <td>{{ field }}</td>
+    {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+
+    {% for customer in customers %}
+        <tr id="{{ customer.id }}">
+            <td><a class="uk-button uk-button-default" href="" uk-icon="icon: file-edit"></a></td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.address }}</td>
+            <td>{{ customer.contact }}</td>
+            <td>{{ customer.telephone }}</td>
+            <td>{{ customer.email }}</td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+
+<div id="modal-sections" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title"></h2>
+        </div>
+        <div class="uk-modal-body">
+            <form id="frmcustomer" action="/main/customer" method="post" class="uk-form-stacked">
+
+                {{ form.id }}
+                <div class="uk-margin">
+                    <div class="uk-form-controls">
+                    {{ form.name }}
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <div class="uk-form-controls">
+                        {{ form.address }}
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <div class="uk-form-controls">
+                        {{ form.contact }}
+                    </div>
+                </div>
+
+            <div class="uk-margin">
+                 <div class="uk-form-controls">
+                {{ form.telephone }}
+                 </div>
+            </div>
+
+            <div class="uk-margin">
+                 <div class="uk-form-controls">
+                {{ form.email }}
+                 </div>
+            </div>
+
+        <div class="uk-modal-footer uk-text-right">
+		<button class="uk-button uk-button-default uk-modal-close" type="button">{% trans "Cancel" %}</button>
+		<button class="uk-button uk-button-primary" type="submit">{% trans "Save" %}</button>
+        </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+{% endblock %}
+{% block jsbottom %}
+<script>
+
+$(document).ready(function(){
+    function edit(ev, elm){
+        ev.preventDefault();
+        $("#id_id").val(parseInt($(elm).attr("id")));
+        $(elm).children("td").slice(1,6).each(function(index,td){
+           $("#modal-sections input.uk-input").slice(index, index+1).val($(td).text());
+        });
+        
+        UIkit.modal("#modal-sections").show();
+     };   
+    $("tbody").children("tr").click(function(ev){edit(ev, this);});
+    $("#addrecord").click(function(ev){
+        ev.preventDefault();
+        $("#id_id").val("0");
+        $("input.uk-input").val("");
+        UIkit.modal("#modal-sections").show();
+        $("#frmcustomer").on("submit", function(ev){
+            UIkit.modal("#modal-sections").hide();
+            $(this).prop("disabled",false);
+        });
+    });
+
+});
+     
+
+</script>
+{% endblock %}

@@ -1,0 +1,252 @@
+{% extends "main/baselogged.html" %}
+{% load i18n %}
+{% block js %}
+<script src="/st/js/jquery.min.js"></script>
+<script>
+var newcid, newblk;
+
+function submitFile(frmprop, url){
+        var form = $(frmprop);
+        var data = new FormData($(form).get(0));
+	url+="/"+$("#id_batch").val();
+        $.ajax({
+                   type: "POST",
+                   url: url,
+                   cache: false,
+                   processData: false,
+                   contentType: false,
+                   data: data,
+                   success: function(data)
+                   {
+                        var test=/ok/i;
+                        if(test.test(data)){
+				UIkit.modal.dialog('<p>{% trans "Started upload and replace database data Task..." %}</p>');
+                        }
+                   },
+                   error: function(data){
+
+                   }
+        });
+    }
+
+    function startPopulate(hrf){
+            $.get(hrf, function(data){
+                var test=/ok/i;
+                if(test.test(data)){
+			UIkit.modal.dialog('<p>{% trans "CLEARING and FILLING Database with blanks..." %}</p>');
+                }
+            });
+    }
+
+    function dbclear(href, noimage, idcampaign){
+            var hrf=href;
+	    newcid=parseInt(idcampaign);
+	    UIkit.modal.confirm('{% trans "Are you sure to CLEAR this projects Database batch and fill it with blanks?" %}<br/>{% trans "It will clear a batch of your choice, chosen in next dialog." %}',  {center: true, stack: true}).then(function () {
+		    UIkit.modal.prompt('{% trans "block number?" %}', '1', {center: true, stack: true}).then(function (bnumber) {
+            if(noimage) {
+		    UIkit.modal.prompt('{% trans "Enter number of records to add" %}', '500',  {center: true, stack: true}).then(function(recs) {
+                    hrf=hrf+"/"+parseInt(bnumber).toString()+"/"+parseInt(recs).toString();
+                    startPopulate(hrf);
+                });
+	    } else {
+		newblk=bnumber; 
+		UIkit.modal("#loadfilebox").show();    
+            }
+	    });
+        });
+       
+    };
+
+    function dbocr(href){
+            var hrf=href;
+
+            UIkit.modal.prompt('<p>{% trans "Select OCR Language from list" %}</p><select class="uk-select" name="tesseract-select">' +
+                {% for lang in languages %}
+                   '<option value="{{ lang.0 }}">{{ lang.1 }}</option>' +
+                {% endfor %}
+            '</select>', { labels: {'ok': 'Select'} })
+            .then(function(value) {
+                var selectedValues = UIkit.util.$$('[name="tesseract-select"] option:checked').map(function(option) {
+                    return option.value;
+                });
+                $.get(hrf+selectedValues, function(data){
+                    var test=/ok/i;
+                    if(test.test(data)){
+                        UIkit.modal.dialog('<p>{% trans "OCR/Barcode Task..." %}</p>');
+                    }
+                });
+        });
+    }
+
+    function dbexport(href){
+	    UIkit.modal.prompt('{% trans "Block Number (Entering 0 will export all batches from project)" %}', '1', {center: true, stack: true}).then(function(block) {
+            $.get(href+"/"+block, function(data){
+                var test=/ok/i;
+                if(test.test(data)){
+			UIkit.modal.dialog('<p>{% trans "EXPORTING DATA to CSV FILE..." %}</p>');
+                }
+            });
+       });
+    }
+
+    function dbupload(href){
+            var url = href;
+            $("#loaddataokbtn").click(function(){
+                submitFile("#loaddataform", url);
+                UIkit.modal("#loaddatadialog").hide();
+
+            });
+            UIkit.modal("#loaddatadialog").show();
+    };
+
+    function dbremove(href){
+        var hrf=href;
+	    UIkit.modal.confirm('{% trans "Are you sure to REMOVE COMPLETELY this PROJECT" %}',  {center: true, stack: true}).then(function () {
+		    UIkit.modal.dialog('<p>{% trans "removing project..." %}</p>');
+		    $.get(hrf, function(ev){
+			    UIkit.modal.dialog('<p>{% trans "project removed..." %}</p>');
+			location.reload();    
+		    });
+        }, function () {
+        });
+    };
+
+    function dbremoveblock(href){
+        var hrf=href;
+	    UIkit.modal.prompt('{% trans "Project BLOCK to remove?" %}').then(function(block){
+		    UIkit.modal.dialog('<p>{% trans "removing block..." %}'+block+'</p>');
+            hrf+="/"+block;
+	    $.get(hrf, function(ev){
+		    UIkit.modal.dialog('<p>{% trans "block" %} '+block+' {% trans "removed..." %}</p>');
+	    });
+        });
+    };
+
+</script>
+{% endblock %}
+{% block body %}1
+
+<div class="uk-section uk-section-muted uk-dark">
+    <div id="loadfilebox" uk-modal>
+        <div class="uk-modal-dialog">    
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-body">
+	<h2 class="uk-modal-title">{% trans 'Images' %}</h2>
+        <div id="imgshow" class="uk-background-cover" style="background-image: url('/st/img/nophoto.png');" uk-height-viewport>
+                            <div class="uk-form-controls">
+                                <p>{% trans "The file to upload with batch must be a tgz or zip file containing numbered jpg images with " %}zero padding.<br/>{% trans "When loaded you will get a message and you should see after pressing in IMAGE button the first image preview." %}</p>
+                            <form id="frmimgfile" method="post" action="/campaigns/startpopulate/" enctype="multipart/form-data">
+                                <div class="js-upload" uk-form-custom>
+                                    {{ imgfileform.file }}
+				    <button class="uk-button uk-button-default" tabindex="-1">{% trans "Select File" %}</button>
+                                </div>
+				<button id="submitimages" class="uk-button uk-button-default">{% trans "Load Images" %}</button>
+                            </form>
+                            <div uk-lightbox stack="true">
+				    <a class="uk-button uk-button-default" href="/media/images/entry/" id="showimagebtn">{% trans "Image" %}</a>
+                            </div>
+        </div>
+        </div>
+	</div>
+        <div class="uk-modal-footer uk-text-right">
+		<button class="uk-button uk-button-default uk-modal-close" type="button">{% trans "Ok" %}</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="uk-section uk-section-muted uk-dark">
+<div id="loaddatadialog" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+		<h2 class="uk-modal-title">{% trans "CSV Data Loader" %}</h2>
+        </div>
+        <div class="uk-modal-body">
+    <form id="loaddataform" action="" method="post">
+                {{ loaddataform.file }}
+		{{ loaddataform.batch }}
+                <div class="uk-inline" id="loaddatamessage">
+                </div>
+            <div class="uk-text-right uk-margin">
+		    <button class="uk-button uk-button-default" type="button" uk-close>{% trans "Cancel" %}</button>
+		    <button class="uk-button uk-button-primary" type="button" id="loaddataokbtn">{% trans "Load" %}</button>
+            </div>
+
+    </form>
+    </div>
+    </div>
+</div>
+<div class="uk-section uk-section-muted uk-dark">
+<div  class="uk-container">
+<table id="users_table" class="uk-table uk-table-small uk-table-divider uk-table-responsive uk-table-hover">
+    <thead>
+        <tr>
+            <td><a href="/campaigns/helper/new" uk-icon="icon: plus-circle" id="addrecord" uk-tooltip='{% trans "ADD AND DEFINE NEW Project" %}'></a></td>
+    {% for field in fields %}
+            <td>{{ field }}</td>
+    {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+
+    {% for campaign in campaigns %}
+        <tr id="{{ customer.id }}">
+            <td>
+		    <a href="#" onclick="javascript:location.href='/campaigns/helper/edit/{{ campaign.id }}';" uk-icon="icon: file-edit" uk-tooltip="{% trans 'EDIT Project SPECS' %}"></a>
+		    <a href="#" onclick="javascript:dbremove('/campaigns/helper/remove/{{ campaign.id }}');" uk-icon="icon: trash" uk-tooltip="{% trans 'DELETE Project completely' %}"></a>
+		    <a href="#" onclick="javascript:dbexport('/campaigns/exportdata/{{ campaign.id }}');" uk-icon="icon: download" uk-tooltip="{% trans 'EXPORT recorded data of the project database(csvfile)' %}"></a>
+		    <a href="#" onclick="javascript:dbupload('/campaigns/loaddata/{{ campaign.id }}');" uk-icon="icon: upload" uk-tooltip="{% trans 'IMPORT csv file into database' %}"></a>
+		    <a href="#" onclick="javascript:dbclear('/campaigns/startpopulate/{{ campaign.id }}',{% if campaign.imagePath == '' %} true {% else %} false {% endif %}, {{ campaign.id  }});" uk-icon="icon: database" uk-tooltip="{% trans 'CLEAR NEW OR EXISTING BLOCK and FILL it with blanks' %}{% trans ' And LOAD batches.' %}"></a>
+		    <a href="#" onclick="javascript:dbremoveblock('/campaigns/removeblock/{{ campaign.id }}');" uk-icon="icon: trash" uk-tooltip="{% trans 'DELETE individual existing BLOCK' %}"></a>
+		    <a href="#" onclick="javascript:dbocr('/campaigns/startocr/{{ campaign.id }}/');" uk-icon="icon: search" uk-tooltip="{% trans 'OCR AND BARCODE scan' %}"></a></td>
+            <td>{{ campaign.name }}</td>
+            <td>{{ campaign.idcustomer.name }}</td>
+	    <td>{% if campaign.imagePath == "" %} {% trans "No" %} {% else %} {% trans "Yes" %} {% endif %}</td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+</div>
+</div>
+
+
+{% endblock %}
+{% block jsbottom %}
+<script>
+    $(document).ready(function(){
+
+            $("#submitimages").click(function(ev){
+                var form = $("#frmimgfile");
+		var url = form.attr('action')+newcid+"/"+newblk;
+                var fd = new FormData(document.getElementById("frmimgfile"));
+                fd.append("label", "WEBUPLOAD");
+		$("#frmimgfile").append('<p id="msg" uk-spinner>{% trans "Loading file..." %}</p>');
+                $.ajax({
+                       type: "POST",
+                       url: url,
+                       processData: false,  // tell jQuery not to process the data
+                       contentType: false,   // tell jQuery not to set contentType
+                       data: fd,
+                       success: function(data)
+                       {
+                            var test=/ok/i;
+                            if(test.test(data)){
+                                $("#msg").remove();
+			        $("#frmimgfile").append('<p>{% trans "Images Loaded" %}</p>');
+                                $("#imgshow").attr("style", "background-image: url('/media/images/entry/"+pad(newcid,4)+"/"+pad(newblk,4)+"/00000000.jpg');");
+				$("#showimagebtn").attr("href", "/media/images/entry/"+pad(newcid,4)+"/"+pad(newblk,4)+"/00000000.jpg");
+                            } else {
+                                ev.preventDefault();
+                            }
+                       },
+                       error: function (data) {
+                       },
+                     });
+        	ev.preventDefault();
+        });
+	UIkit.modal("#loadfilebox").hide();    
+});
+</script>
+{% endblock %}

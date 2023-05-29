@@ -1,0 +1,38 @@
+{% extends "main/baselogged.html" %}
+{% load i18n %}
+{% block baroptions %}
+{% endblock %}
+{% block body %}
+{% if not saved %}
+<div id="languagedialog" class="uk-child-width-3-4@s" uk-grid>
+    <div><div class="uk-light uk-background-secondary uk-padding">
+    <form action="/main/language" method="post">
+
+
+	    <h2 class="uk-title">{% trans "Modify Language" %}</h2>
+
+            {% csrf_token %}
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    {{ form.language }}
+                </div>
+            </div>
+                <div class="uk-text-right uk-margin">
+			<button class="uk-button uk-button-default" type="button">{% trans "Cancel" %}</button>
+			<button class="uk-button uk-button-primary" type="submit">{% trans "Ok" %}</button>
+                </div>
+    </form>
+    </div></div>
+</div>
+{% else %}
+            <div uk-alert class="uk-padding">
+                <a class="uk-alert-close" uk-close></a>
+                <h3> {{ msg }} </h3>
+            </div>
+            <script type="text/javascript">
+            setTimeout(function() {
+                location.pathname='{% url "main:controlpanel" %}';
+                },2000);
+            </script>
+{% endif %}
+{% endblock %}

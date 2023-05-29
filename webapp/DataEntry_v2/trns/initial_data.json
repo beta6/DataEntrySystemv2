@@ -1,0 +1,196 @@
+[
+
+  {
+    "model": "campaigns.properties",
+    "pk": 1,
+    "fields": {
+      "identifier": "B1",
+      "description": "ByPass by Value: Jump depending on list value (YES)"
+    }
+  },
+  {
+    "model": "campaigns.properties",
+    "pk": 2,
+    "fields": {
+      "identifier": "B2",
+      "description": "ByPass by Value: Jump depending on list value (NO)"
+     }
+  },
+  {
+    "model": "campaigns.properties",
+    "pk": 3,
+    "fields": {
+      "identifier": "B3",
+      "description": "ByPass : Jump always"
+    }
+  },
+  {
+    "model": "campaigns.properties",
+    "pk": 4,
+    "fields": {
+      "identifier": "B4",
+      "description": "ByPass Blank: Jump if field is not in blank"
+    }
+  },
+  {
+    "model": "campaigns.properties",
+    "pk": 5,
+    "fields": {
+      "identifier": "B5",
+      "description": "ByPass Screen: Jump to another page"
+    }
+  },
+  {
+    "model": "campaigns.properties",
+    "pk": 6,
+    "fields": {
+      "identifier": "A1",
+      "description": "Alpha Adjust: Alphanumeric adjust."
+    }
+  },
+    {
+    "model": "campaigns.properties",
+    "pk": 7,
+    "fields": {
+      "identifier": "C1",
+      "description": "identifier Select: Written code selects text in another field"
+    }
+  },
+    {
+    "model": "campaigns.properties",
+    "pk": 8,
+    "fields": {
+      "identifier": "C2",
+      "description": "identifier Select: Text selects code"
+    }
+  },
+    {
+    "model": "campaigns.properties",
+    "pk": 9,
+    "fields": {
+      "identifier": "C3",
+      "description": "identifier Select: Automatic selection from dropdown."
+    }
+  },
+    {
+    "model": "campaigns.properties",
+    "pk": 10,
+    "fields": {
+      "identifier": "C4",
+      "description": "identifier Select: List mode. If value dont exist, its created in list."
+    }
+  },
+    {
+    "model": "campaigns.properties",
+    "pk": 11,
+    "fields": {
+      "identifier": "O1",
+      "description": "OCR: Number or Text."
+}
+  },
+    {
+    "model": "campaigns.properties",
+    "pk": 12,
+    "fields": {
+      "identifier": "O2",
+      "description": "OCR: BarCode."
+    }
+  },
+    {
+    "model": "campaigns.properties",
+    "pk": 13,
+    "fields": {
+      "identifier": "I1",
+      "description": "Image: Selected Image Area on screen for data entry."
+    }
+  },
+    {
+    "model": "campaigns.properties",
+    "pk": 14,
+    "fields": {
+      "identifier": "M1",
+      "description": "Alphanumeric Mask: Alphanumeric Mask."
+    }
+  },
+    {
+    "model": "campaigns.properties",
+    "pk": 15,
+    "fields": {
+      "identifier": "M2",
+      "description": "Numeric Mask: Numeric Mask."
+    }
+  },
+    {
+    "model": "campaigns.properties",
+    "pk": 16,
+    "fields": {
+      "identifier": "M3",
+      "description": "Alphanumeric Mask sprintf: C sprintf texts and numeric transformation."
+    }
+  },
+    {
+    "model": "campaigns.properties",
+    "pk": 17,
+    "fields": {
+      "identifier": "V1",
+      "description": "To Be verified: Field to VERIFY N times."
+    }
+  },
+    {
+    "model": "campaigns.properties",
+    "pk": 18,
+    "fields": {
+      "identifier": "R1",
+      "description": "Required: Required field."
+    }
+  },
+    {
+    "model": "campaigns.properties",
+    "pk": 19,
+    "fields": {
+      "identifier": "F1",
+      "description": "FillAll: FILL FIELD completely."
+    }
+  },
+    {
+    "model": "campaigns.properties",
+    "pk": 20,
+    "fields": {
+      "identifier": "C5",
+      "description": "ListShowText: Grabs code, show text in LIST."
+    }
+  },
+    {
+    "model": "campaigns.properties",
+    "pk": 21,
+    "fields": {
+      "identifier": "L1",
+      "description": "MinValue: Integer MINimum value accepted."
+    }
+  },
+    {
+    "model": "campaigns.properties",
+    "pk": 22,
+    "fields": {
+      "identifier": "L2",
+      "description": "MaxValue: Integer MAXimum value accepted."
+    }
+  },
+    {
+    "model": "campaigns.properties",
+    "pk": 23,
+    "fields": {
+      "identifier": "O3",
+      "description": "FillOR: Fill field or the selected field."
+    }
+  },
+    {
+    "model": "campaigns.properties",
+    "pk": 24,
+    "fields": {
+      "identifier": "I2",
+      "description": "ImgPath: Image Path in field"
+    }
+  }
+
+  ]

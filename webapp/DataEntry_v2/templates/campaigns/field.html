@@ -1,0 +1,15 @@
+<form id="frmfield" action="/campaigns/field/{{ cid }}/{{ fid }}" method="post" class="uk-form-stacked">
+
+	{% for field in fieldform.hidden_fields %}
+        	{{ field }}
+    	{% endfor %}
+
+	{% for field in fieldform.visible_fields %}
+        <div class="uk-margin">
+        <div class="uk-form-controls">
+            {{ field }}
+        </div>
+        </div>
+         {% endfor %}
+        <div>{{ msg }}</div>
+</form>

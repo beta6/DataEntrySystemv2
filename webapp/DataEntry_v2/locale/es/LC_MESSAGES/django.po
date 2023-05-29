@@ -1,0 +1,1280 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-01 12:19+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+
+#: campaigns/forms.py:35
+msgid "Image Project "
+msgstr "Proyecto de imagen "
+
+#: campaigns/forms.py:38
+msgid "Campaign Name"
+msgstr "Nombre de Campaña"
+
+#: campaigns/forms.py:40 campaigns/views.py:202
+msgid "Customer"
+msgstr "Cliente"
+
+#: campaigns/forms.py:42 campaigns/views.py:202
+#: templates/campaigns/helper.html:231
+msgid "Image Project"
+msgstr "Proyecto de imagen"
+
+#: campaigns/forms.py:49 campaigns/forms.py:56 campaigns/forms.py:126
+msgid "Load File"
+msgstr "Cargar Archivo"
+
+#: campaigns/forms.py:61
+msgid "Block Number"
+msgstr "Número de bloque"
+
+#: campaigns/forms.py:68 campaigns/views.py:45 campaigns/views.py:367
+msgid "Field Name"
+msgstr "Nombre del campo"
+
+#: campaigns/forms.py:72 campaigns/views.py:45
+msgid "Length"
+msgstr "Longitud"
+
+#: campaigns/forms.py:98
+msgid "Properties"
+msgstr "Propiedades"
+
+#: campaigns/forms.py:99
+msgid "Select Property"
+msgstr "Seleccione Propiedad"
+
+#: campaigns/forms.py:101
+msgid "Property"
+msgstr "Propiedad"
+
+#: campaigns/forms.py:105
+msgid "Fields"
+msgstr "Campos"
+
+#: campaigns/forms.py:106 campaigns/views.py:356
+msgid "Select Field"
+msgstr "Seleccione el campo"
+
+#: campaigns/forms.py:113 campaigns/views.py:355 campaigns/views.py:358
+msgid "Field"
+msgstr "Campo"
+
+#: campaigns/forms.py:129 campaigns/views.py:96
+msgid "List Name"
+msgstr "Nombre de la lista"
+
+#: campaigns/functions.py:121
+msgid "Incorrect Filename. Allowed Chars: '0-9a-z._-A-Z'"
+msgstr "Nombre de archivo incorrecto. Caracteres permitidos: '0-9a-z._-A-Z'"
+
+#: campaigns/functions.py:131
+#, python-format
+msgid "Error: processing compressed file: %s"
+msgstr "Error: procesando archivo comprimido: %s"
+
+#: campaigns/functions.py:135
+msgid "Error: file type not supported."
+msgstr "Error: tipo de archivo no admitido."
+
+#: campaigns/views.py:45
+msgid "Field Type"
+msgstr "Tipo de campo"
+
+#: campaigns/views.py:45
+msgid "Field Nº"
+msgstr "Nº de campo"
+
+#: campaigns/views.py:45
+msgid "Screen Nº"
+msgstr "Nº de pantalla"
+
+#: campaigns/views.py:96
+msgid "Count"
+msgstr "Cuenta"
+
+#: campaigns/views.py:106
+msgid "Enter csv file with separator ':' and two fields: code and value"
+msgstr ""
+"Introduzca el archivo csv con el separador ':' y dos campos: código y valor"
+
+#: campaigns/views.py:114 campaigns/views.py:545
+msgid "error saving file..."
+msgstr "error al guardar el archivo..."
+
+#: campaigns/views.py:121
+msgid "file must be utf-8 encoding"
+msgstr "el archivo debe estar codificado en utf-8"
+
+#: campaigns/views.py:128
+msgid "List load "
+msgstr "Carga de la lista "
+
+#: campaigns/views.py:129
+msgid "Import Data"
+msgstr "Importación de Datos"
+
+#: campaigns/views.py:148 templates/campaigns/listseditor.html:32
+msgid "Code"
+msgstr "Código"
+
+#: campaigns/views.py:148 templates/campaigns/listseditor.html:33
+msgid "Value"
+msgstr "Valor"
+
+#: campaigns/views.py:202 campaigns/views.py:631 main/forms.py:48
+#: main/forms.py:137 main/forms.py:169 main/views.py:337
+#: templates/main/docs.html:21
+msgid "Name"
+msgstr "Nombre"
+
+#: campaigns/views.py:300
+msgid "Invalid data. Correct it and retry."
+msgstr "Datos no válidos. Corríjalo y vuelva a intentarlo."
+
+#: campaigns/views.py:349 campaigns/views.py:352
+msgid "List"
+msgstr "Lista"
+
+#: campaigns/views.py:350
+msgid "Select List"
+msgstr "Seleccione la lista"
+
+#: campaigns/views.py:363
+msgid "Screen"
+msgstr "Pantalla"
+
+#: campaigns/views.py:371
+msgid "Integer"
+msgstr "Entero"
+
+#: campaigns/views.py:460
+msgid "invalid form"
+msgstr "formulario inválido"
+
+#: campaigns/views.py:522
+msgid "BarCode read from campaign "
+msgstr "Código de barras leído de la campaña "
+
+#: campaigns/views.py:528
+msgid "OCR read from campaign "
+msgstr "OCR leído de la campaña "
+
+#: campaigns/views.py:553 campaigns/views.py:560
+msgid "Campaign "
+msgstr "Campañas"
+
+#: campaigns/views.py:553 campaigns/views.py:560
+msgid ", filling in"
+msgstr ", rellenando"
+
+#: campaigns/views.py:554 campaigns/views.py:561
+msgid "Clear&Fill Data"
+msgstr "Borrar y rellenar datos"
+
+#: campaigns/views.py:587
+msgid "Load Data from campaign "
+msgstr "Cargar datos de la campaña "
+
+#: campaigns/views.py:588
+msgid "Load Data"
+msgstr "Datos de carga"
+
+#: campaigns/views.py:603
+msgid "Download campaign "
+msgstr "Descargar campaña "
+
+#: campaigns/views.py:604
+msgid "Export Data"
+msgstr "Exportación de datos"
+
+#: campaigns/views.py:630
+msgid "Status"
+msgstr "Estatus"
+
+#: campaigns/views.py:632
+msgid "Data"
+msgstr "Datos"
+
+#: entry/views.py:172 entry/views.py:191
+msgid "unassigned"
+msgstr "sin asignar"
+
+#: entry/views.py:220 entry/views.py:283 main/views.py:66 main/views.py:78
+#: main/views.py:88
+msgid "Data Entry"
+msgstr "Data Entry"
+
+#: entry/views.py:220 entry/views.py:283 main/views.py:67 main/views.py:79
+#: main/views.py:89
+msgid "Data Verify"
+msgstr "Verificación de datos"
+
+#: entry/views.py:282
+msgid "Hour"
+msgstr "Hora"
+
+#: entry/views.py:282
+msgid "Day"
+msgstr "Día"
+
+#: entry/views.py:282
+msgid "Month"
+msgstr "Mes"
+
+#: entry/views.py:282
+msgid "Year"
+msgstr "Año"
+
+#: entry/views.py:283
+msgid "All"
+msgstr "Todo"
+
+#: main/forms.py:36 main/forms.py:62
+msgid "User"
+msgstr "Usuario"
+
+#: main/forms.py:39 main/forms.py:66
+msgid "Password"
+msgstr "Contraseña"
+
+#: main/forms.py:55 main/forms.py:144
+msgid "Surname"
+msgstr "Apellidos"
+
+#: main/forms.py:69 main/forms.py:147 main/models.py:34
+msgid "Developer"
+msgstr "Desarrollador"
+
+#: main/forms.py:69 main/forms.py:147
+msgid "Monitor"
+msgstr "Monitor"
+
+#: main/forms.py:69 main/forms.py:147 main/models.py:32
+msgid "Worker"
+msgstr "Trabajador"
+
+#: main/forms.py:75 main/forms.py:153 main/views.py:293
+msgid "Position"
+msgstr "Posición"
+
+#: main/forms.py:84 main/forms.py:108 main/forms.py:118 main/views.py:72
+#: main/views.py:84 main/views.py:94
+msgid "Language"
+msgstr "Idioma"
+
+#: main/forms.py:92
+msgid "Current Password"
+msgstr "Contraseña Actual"
+
+#: main/forms.py:94
+msgid "New Password"
+msgstr "Nueva Contraseña"
+
+#: main/forms.py:96
+msgid "New Password (again)"
+msgstr "Nueva contraseña (otra vez)"
+
+#: main/forms.py:126 main/views.py:76
+msgid "Users"
+msgstr "Usuarios"
+
+#: main/forms.py:155 main/views.py:293 templates/main/users.html:66
+msgid "Active"
+msgstr "Activo"
+
+#: main/forms.py:175 main/views.py:337
+msgid "Contact"
+msgstr "Contact"
+
+#: main/forms.py:180 main/views.py:337
+msgid "Address"
+msgstr "Dirección"
+
+#: main/forms.py:186 main/views.py:337
+msgid "Telephone"
+msgstr "Teléfono"
+
+#: main/forms.py:190 main/views.py:337
+msgid "e-mail"
+msgstr "correo electrónico"
+
+#: main/models.py:33
+msgid "Data Entry Monitor"
+msgstr "Monitor de entrada de datos"
+
+#: main/views.py:62
+msgid "Campaigns"
+msgstr "Campañas"
+
+#: main/views.py:63
+msgid "Customers"
+msgstr "Clientes"
+
+#: main/views.py:64 templates/campaigns/listview.html:11
+msgid "Lists"
+msgstr "Listas"
+
+#: main/views.py:65
+msgid "Tasks"
+msgstr "Tareas"
+
+#: main/views.py:68 main/views.py:80 main/views.py:90
+msgid "Statistics"
+msgstr "Estadísticas"
+
+#: main/views.py:69 main/views.py:81 main/views.py:91 main/views.py:100
+msgid "Docs"
+msgstr "Docs"
+
+#: main/views.py:70 main/views.py:82 main/views.py:92 main/views.py:101
+msgid "About"
+msgstr "Acerca de"
+
+#: main/views.py:71 main/views.py:83 main/views.py:93
+msgid "Change Password"
+msgstr "Cambiar la contraseña"
+
+#: main/views.py:73 main/views.py:85 main/views.py:95
+msgid "Logout"
+msgstr "Cierre de sesión"
+
+#: main/views.py:77
+msgid "Project Users"
+msgstr "Usuarios del proyecto"
+
+#: main/views.py:98 templates/main/login.html:3 templates/main/login.html:11
+msgid "Login"
+msgstr "Inicio de sesión"
+
+#: main/views.py:99 templates/main/register.html:3
+#: templates/main/register.html:13
+msgid "Register"
+msgstr "Registro"
+
+#: main/views.py:162
+#, python-format
+msgid "Welcome, %s"
+msgstr "Bienvenido, %s"
+
+#: main/views.py:170
+msgid "Username or password not valid or account disabled."
+msgstr ""
+"El nombre de usuario o la contraseña no son válidos o la cuenta está "
+"desactivada."
+
+#: main/views.py:177
+msgid ", Session Finished"
+msgstr ", Sesión terminada"
+
+#: main/views.py:193
+#, python-format
+msgid "%s username already exists, try another one"
+msgstr "El nombre de usuario %s ya existe, prueba con otro"
+
+#: main/views.py:209
+#, python-format
+msgid "%s. Notification sent."
+msgstr "%s. Notificación enviada."
+
+#: main/views.py:212
+msgid "Incorrect data. Review and retry."
+msgstr "Datos incorrectos. Revisar y reintentar."
+
+#: main/views.py:231
+msgid "Language updated to "
+msgstr "Idioma actualizado a "
+
+#: main/views.py:235 main/views.py:267
+msgid "Incorrect Data"
+msgstr "Datos incorrectos"
+
+#: main/views.py:237
+msgid "Select desired language, please"
+msgstr "Seleccione el idioma deseado, por favor"
+
+#: main/views.py:260
+msgid "Password updated"
+msgstr "Contraseña actualizada"
+
+#: main/views.py:263
+msgid "Passwords do not match"
+msgstr "Las contraseñas no coinciden"
+
+#: main/views.py:265
+msgid "Incorrect Password"
+msgstr "Contraseña incorrecta"
+
+#: main/views.py:293
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#: main/views.py:293
+msgid "First Name"
+msgstr "Nombre"
+
+#: main/views.py:293
+msgid "Last Name"
+msgstr "Apellido"
+
+#: main/views.py:293
+msgid "Registered Date"
+msgstr "Fecha de registro"
+
+#: main/views.py:294
+msgid "Last Login"
+msgstr "Última conexión"
+
+#: templates/campaigns/campaigns.html:23
+msgid "Started upload and replace database data Task..."
+msgstr "Comenzó a cargar y reemplazar los datos de la base de datos Tarea..."
+
+#: templates/campaigns/campaigns.html:36
+msgid "CLEARING and FILLING Database with blanks..."
+msgstr "LIMPIEZA y RELLENADO de la base de datos con espacios en blanco..."
+
+#: templates/campaigns/campaigns.html:44
+msgid ""
+"Are you sure to CLEAR this projects Database batch and fill it with blanks?"
+msgstr ""
+"¿Estás seguro de que vas a borrar esta base de datos de proyectos y llenarla "
+"de registros en blanco?"
+
+#: templates/campaigns/campaigns.html:44
+msgid "It will clear a batch of your choice, chosen in next dialog."
+msgstr "Esto borrará un lote de tu elección a elegir luego"
+
+#: templates/campaigns/campaigns.html:45
+msgid "block number?"
+msgstr "¿Número de bloque?"
+
+#: templates/campaigns/campaigns.html:47
+msgid "Enter number of records to add"
+msgstr "Introduzca el número de registros a añadir"
+
+#: templates/campaigns/campaigns.html:63
+msgid "Select OCR Language from list"
+msgstr "Seleccione el idioma de OCR de la lista"
+
+#: templates/campaigns/campaigns.html:75
+msgid "OCR/Barcode Task..."
+msgstr "Tarea de OCR/Código de barras..."
+
+#: templates/campaigns/campaigns.html:82
+msgid "Block Number (Entering 0 will export all batches from project)"
+msgstr ""
+"Número de bloque (si se introduce 0, se exportarán todos los lotes del "
+"proyecto)"
+
+#: templates/campaigns/campaigns.html:86
+msgid "EXPORTING DATA to CSV FILE..."
+msgstr "EXPORTACIÓN DE DATOS A UN ARCHIVO CSV..."
+
+#: templates/campaigns/campaigns.html:104
+msgid "Are you sure to REMOVE COMPLETELY this PROJECT"
+msgstr "¿Está seguro de eliminar por completo este proyecto?"
+
+#: templates/campaigns/campaigns.html:105
+msgid "removing project..."
+msgstr "eliminando el proyecto..."
+
+#: templates/campaigns/campaigns.html:107
+msgid "project removed..."
+msgstr "proyecto eliminado..."
+
+#: templates/campaigns/campaigns.html:116
+msgid "Project BLOCK to remove?"
+msgstr "¿Proyecto BLOQUE para eliminar?"
+
+#: templates/campaigns/campaigns.html:117
+msgid "removing block..."
+msgstr "quitando el bloque..."
+
+#: templates/campaigns/campaigns.html:120
+msgid "block"
+msgstr "bloque"
+
+#: templates/campaigns/campaigns.html:120
+msgid "removed..."
+msgstr "retirado..."
+
+#: templates/campaigns/campaigns.html:134
+msgid "Images"
+msgstr "Imagenes"
+
+#: templates/campaigns/campaigns.html:137
+msgid ""
+"The file to upload with batch must be a tgz or zip file containing numbered "
+"jpg images with "
+msgstr ""
+"El archivo a cargar por lotes debe ser un archivo tgz o zip que contenga "
+"imágenes jpg numeradas con"
+
+#: templates/campaigns/campaigns.html:137
+msgid ""
+"When loaded you will get a message and you should see after pressing in "
+"IMAGE button the first image preview."
+msgstr ""
+"Cuando cargue obtendrás  un mensaje y deberías verlo tras pulsar el botón "
+"IMAGEN del primer previsualizado de imágen"
+
+#: templates/campaigns/campaigns.html:141 templates/campaigns/helper.html:259
+msgid "Select File"
+msgstr "Seleccione el archivo"
+
+#: templates/campaigns/campaigns.html:143 templates/campaigns/helper.html:261
+msgid "Load Images"
+msgstr "Cargar imágenes"
+
+#: templates/campaigns/campaigns.html:146 templates/campaigns/helper.html:264
+msgid "Image"
+msgstr "Imagen"
+
+#: templates/campaigns/campaigns.html:152 templates/campaigns/helper.html:328
+#: templates/campaigns/newlist.html:36 templates/entry/entry.html:88
+#: templates/main/language.html:22 templates/main/login.html:35
+#: templates/main/password.html:42 templates/main/register.html:56
+msgid "Ok"
+msgstr "Ok"
+
+#: templates/campaigns/campaigns.html:163
+msgid "CSV Data Loader"
+msgstr "Cargador de datos CSV"
+
+#: templates/campaigns/campaigns.html:172 templates/campaigns/helper.html:273
+#: templates/campaigns/helper.html:327 templates/campaigns/helper.html:346
+#: templates/campaigns/helper.html:368 templates/campaigns/listseditor.html:23
+#: templates/campaigns/newlist.html:35 templates/main/customers.html:75
+#: templates/main/language.html:21 templates/main/login.html:34
+#: templates/main/password.html:41 templates/main/projectusers.html:10
+#: templates/main/register.html:55 templates/main/users.html:71
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: templates/campaigns/campaigns.html:173
+msgid "Load"
+msgstr "Carga"
+
+#: templates/campaigns/campaigns.html:185
+msgid "ADD AND DEFINE NEW Project"
+msgstr "AÑADIR Y DEFINIR NUEVO Proyecto"
+
+#: templates/campaigns/campaigns.html:196
+msgid "EDIT Project SPECS"
+msgstr "EDITAR ESPECIFICACIONES DEL PROYECTO"
+
+#: templates/campaigns/campaigns.html:197
+msgid "DELETE Project completely"
+msgstr "Borrar completamente el proyecto"
+
+#: templates/campaigns/campaigns.html:198
+msgid "EXPORT recorded data of the project database(csvfile)"
+msgstr ""
+"Exportar los datos registrados de la base de datos del proyecto (archivo csv)"
+
+#: templates/campaigns/campaigns.html:199
+msgid "IMPORT csv file into database"
+msgstr "IMPORTAR el archivo csv en la base de datos"
+
+#: templates/campaigns/campaigns.html:200
+msgid "CLEAR NEW OR EXISTING BLOCK and FILL it with blanks"
+msgstr "LIMPIEZA y RELLENADO de la base de datos con espacios en blanco..."
+
+#: templates/campaigns/campaigns.html:200
+msgid " And LOAD batches."
+msgstr " Y CARGA los lotes."
+
+#: templates/campaigns/campaigns.html:201
+msgid "DELETE individual existing BLOCK"
+msgstr "BORRAR BLOQUE individual existente"
+
+#: templates/campaigns/campaigns.html:202
+msgid "OCR AND BARCODE scan"
+msgstr "Escaneo de OCR y código de barras"
+
+#: templates/campaigns/campaigns.html:205 templates/main/users.html:27
+msgid "No"
+msgstr "No"
+
+#: templates/campaigns/campaigns.html:205 templates/main/users.html:27
+msgid "Yes"
+msgstr "Sí"
+
+#: templates/campaigns/campaigns.html:225 templates/campaigns/helper.html:431
+msgid "Loading file..."
+msgstr "Cargando archivo..."
+
+#: templates/campaigns/campaigns.html:237 templates/campaigns/helper.html:445
+msgid "Images Loaded"
+msgstr "Imágenes cargadas"
+
+#: templates/campaigns/helper.html:139
+msgid "Are you sure?"
+msgstr "¿Está seguro?"
+
+#: templates/campaigns/helper.html:214
+msgid "Campaign"
+msgstr "Campaña"
+
+#: templates/campaigns/helper.html:255
+msgid ""
+"Load a .jpg file that will be used as base model for Data Entry.<br/>Images "
+"in batches, later will be of the same type as this one. Same size, same "
+"design, same fields."
+msgstr ""
+"Cargue un archivo .jpg que se utilizará como modelo base para la Entrada de "
+"Datos.<br/>Las imágenes por lotes, más tarde serán del mismo tipo que ésta. "
+"Mismo tamaño, mismo diseño, mismos campos."
+
+#: templates/campaigns/helper.html:272 templates/campaigns/helper.html:345
+#: templates/campaigns/helper.html:367
+msgid "Previous"
+msgstr "Anteriormente"
+
+#: templates/campaigns/helper.html:274 templates/campaigns/helper.html:347
+#: templates/entry/entry.html:55
+msgid "Next"
+msgstr "Siguiente"
+
+#: templates/campaigns/helper.html:283
+msgid "Fields and Properties"
+msgstr "Campos y propiedades"
+
+#: templates/campaigns/helper.html:322
+msgid "Add Field"
+msgstr "Añadir campo"
+
+#: templates/campaigns/helper.html:339
+msgid "Image Position"
+msgstr "Posición de la imagen"
+
+#: templates/campaigns/helper.html:360
+msgid "Project ready to use."
+msgstr "Proyecto listo para usar."
+
+#: templates/campaigns/helper.html:361
+msgid "Now, click populate and OCR option to clear database and fill ocr data."
+msgstr ""
+"Ahora, haga clic en la opción de rellenar y OCR para limpiar la base de "
+"datos y rellenar los datos OCR."
+
+#: templates/campaigns/helper.html:365
+msgid "Load Data from CSV into Database"
+msgstr "Cargar datos de CSV en la base de datos"
+
+#: templates/campaigns/helper.html:369
+msgid "Done"
+msgstr "Hecho"
+
+#: templates/campaigns/imgselect.html:3
+msgid "Open"
+msgstr "Abrir"
+
+#: templates/campaigns/lists.html:14
+msgid "Add List to Database"
+msgstr "Añadir lista a la base de datos"
+
+#: templates/campaigns/lists.html:22
+msgid "Remove List From Database"
+msgstr "Eliminar la lista de la base de datos"
+
+#: templates/campaigns/lists.html:23
+msgid "View List Data"
+msgstr "Ver datos de la lista"
+
+#: templates/campaigns/lists.html:40
+msgid "Really want to remove list?"
+msgstr "¿Realmente quiere eliminar la lista?"
+
+#: templates/campaigns/lists.html:41
+msgid "removing list..."
+msgstr "eliminando la lista..."
+
+#: templates/campaigns/listseditor.html:11 templates/campaigns/newlist.html:11
+msgid "New List"
+msgstr "Nueva lista"
+
+#: templates/campaigns/listseditor.html:24
+#: templates/campaigns/properties.html:4
+msgid "Add"
+msgstr "Añadir"
+
+#: templates/campaigns/newlist.html:47
+msgid "Loading... please, wait..."
+msgstr "Cargando... por favor, espere..."
+
+#: templates/campaigns/properties.html:16
+msgid "Remove"
+msgstr "Eliminar"
+
+#: templates/campaigns/properties.html:16 templates/main/customers.html:76
+#: templates/main/projectusers.html:11 templates/main/users.html:72
+msgid "Save"
+msgstr "Guardar"
+
+#: templates/entry/entry.html:42
+msgid ""
+"title: Keys:<br/> 'alt' show current content <br/> 'ctrl' first field "
+"focus<br/> '+' confirm changes<br/> 'esc' close hints<br/> 'enter' next "
+"field<br/> 'up key' previous field"
+msgstr ""
+"title: Teclas:<br/> 'alt' mostrar contenido actual <br/> 'ctrl' primer foco "
+"de campo<br/> '+' confirmar cambios<br/> 'esc' cerrar pistas<br/> 'enter' "
+"campo siguiente<br/> 'tecla arriba' campo anterior"
+
+#: templates/entry/entry.html:43 templates/entry/entry.html:48
+msgid "Keys"
+msgstr "Claves"
+
+#: templates/entry/entry.html:45
+msgid "verify"
+msgstr "verificar"
+
+#: templates/entry/entry.html:47
+msgid ""
+"title: Keys:<br/> 'ctrl' first field focus<br/> 'esc' close hints<br/> "
+"'enter' next field<br/> 'up key' previous field"
+msgstr ""
+"title: Teclas:<br/>  'ctrl'  foco de campo a 1er campo<br/>  'esc' cerrar "
+"mensajes<br/> 'enter' campo siguiente<br/> 'tecla arriba' campo anterior"
+
+#: templates/entry/entry.html:52
+msgid "Prev"
+msgstr "Prev"
+
+#: templates/entry/entry.html:53
+msgid "Reset"
+msgstr "Reiniciar"
+
+#: templates/entry/entry.html:54
+msgid "Go To Record"
+msgstr "Ir al registro"
+
+#: templates/entry/entry.html:57
+msgid "batch"
+msgstr "lote"
+
+#: templates/entry/entry.html:85
+msgid "Data Entry Finished"
+msgstr "Entrada de datos terminada"
+
+#: templates/entry/entry.html:85
+msgid "Verification Finished"
+msgstr "Verificación finalizada"
+
+#: templates/entry/entry.html:100
+msgid "record number to go to?"
+msgstr "numero de registro para posicionarse?"
+
+#: templates/entry/entry.html:147
+msgid "Verification: Text doesnt match: "
+msgstr "Verificación: El texto no coincide:"
+
+#: templates/entry/entry.html:151
+msgid "Verification: Text OK:"
+msgstr "Verificación: Texto OK:"
+
+#: templates/entry/entry.html:228 templates/entry/entry.html:230
+msgid "Verification: "
+msgstr "Verificación:"
+
+#: templates/entry/entry.html:429
+msgid " empty field(s)"
+msgstr " campo(s) vacío(s)"
+
+#: templates/entry/entry.html:434
+msgid " not filled in fields"
+msgstr " campos no rellenados"
+
+#: templates/entry/entry.html:438 templates/entry/entry.html:527
+msgid " value out of range"
+msgstr " valor fuera de rango"
+
+#: templates/entry/entry.html:497
+msgid " corrected data : "
+msgstr " datos corregidos :"
+
+#: templates/entry/entry.html:523
+msgid " not all required fields filled in"
+msgstr " no se han rellenado todos los campos obligatorios"
+
+#: templates/entry/stats.html:18
+msgid "Select Project"
+msgstr "Seleccione el proyecto"
+
+#: templates/entry/stats.html:25
+msgid "Select User"
+msgstr "Seleccionar usuario"
+
+#: templates/entry/stats.html:31
+msgid "Select Time Measure"
+msgstr "Seleccione la medida de tiempo"
+
+#: templates/entry/stats.html:37
+msgid "Select Operation"
+msgstr "Seleccione la operación"
+
+#: templates/entry/stats.html:39
+msgid "Chart"
+msgstr "Gráfico"
+
+#: templates/entry/stats.html:55
+msgid "Data Entry Statistics"
+msgstr "Estadísticas de entrada de datos"
+
+#: templates/entry/stats.html:56
+msgid "Data Entry/Verify"
+msgstr "Entrada de datos/Verificación"
+
+#: templates/main/about.html:7
+msgid ""
+"<p>Contact me if you find bugs, security issues or want new improvements, "
+"etc...</p><br/>"
+msgstr ""
+"<p>Contacta conmigo si encuentras bugs, problemas de seguridad o quieres "
+"nuevas mejoras, etc...</p><br/>"
+
+#: templates/main/about.html:11
+msgid ""
+"This program is free software: you can redistribute it and/or modify it "
+"under the terms of the GNU General Public License as published by the Free "
+"Software Foundation, either version 3 of the License, or (at your option) "
+"any later version."
+msgstr ""
+"Este programa es software libre: puede redistribuirlo y/o modificarlo bajo "
+"los términos de la Licencia Pública General GNU publicada por la Fundación "
+"para el Software Libre, ya sea la versión 3 de la Licencia, o (a su "
+"elección) cualquier versión posterior."
+
+#: templates/main/about.html:13
+msgid ""
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details."
+msgstr ""
+"Este programa se distribuye con la esperanza de que sea útil, pero SIN "
+"NINGUNA GARANTÍA; ni siquiera la garantía implícita de COMERCIALIZACIÓN o "
+"ADECUACIÓN A UN PROPÓSITO PARTICULAR.  Vea la Licencia Pública General GNU "
+"para más detalles."
+
+#: templates/main/about.html:15
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program.  If not, see"
+msgstr ""
+"Debería haber recibido una copia de la Licencia Pública General GNU junto "
+"con este programa.  Si no es así, consulte"
+
+#: templates/main/about.html:23
+msgid "Disclaimer"
+msgstr "Descargo de responsabilidad"
+
+#: templates/main/about.html:24
+msgid ""
+"THIS SOFTWARE IS PROVIDED 'AS IS' AND ANY EXPRESSED OR IMPLIED WARRANTIES, "
+"INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND "
+"FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE "
+"REGENTS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, "
+"SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, "
+"PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; "
+"OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, "
+"WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR "
+"OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF "
+"ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
+msgstr ""
+"ESTE SOFTWARE SE PROPORCIONA \"TAL CUAL\" Y SE RECHAZA CUALQUIER GARANTÍA "
+"EXPRESA O IMPLÍCITA, INCLUIDAS, ENTRE OTRAS, LAS GARANTÍAS IMPLÍCITAS DE "
+"COMERCIABILIDAD E IDONEIDAD PARA UN FIN DETERMINADO. EN NINGÚN CASO LOS "
+"REGENTES O LOS COLABORADORES SERÁN RESPONSABLES DE NINGÚN DAÑO DIRECTO, "
+"INDIRECTO, INCIDENTAL, ESPECIAL, EJEMPLAR O CONSECUENTE (INCLUYENDO, PERO "
+"SIN LIMITARSE A, LA ADQUISICIÓN DE BIENES O SERVICIOS SUSTITUTIVOS; LA "
+"PÉRDIDA DE USO, DATOS O BENEFICIOS; O LA INTERRUPCIÓN DE LA ACTIVIDAD "
+"COMERCIAL), SEA CUAL SEA LA CAUSA Y LA TEORÍA DE LA RESPONSABILIDAD, YA SEA "
+"POR CONTRATO, RESPONSABILIDAD ESTRICTA O AGRAVIO (INCLUYENDO LA NEGLIGENCIA "
+"O DE OTRO TIPO) QUE SURJA DE CUALQUIER MANERA DEL USO DE ESTE SOFTWARE, "
+"INCLUSO SI SE AVISA DE LA POSIBILIDAD DE TALES DAÑOS."
+
+#: templates/main/baselogged.html:28
+msgid "Menu Options"
+msgstr "Menú de opciones"
+
+#: templates/main/controlpanel.html:7 templates/main/start.html:7
+msgid "Welcome to Data Entry System v2"
+msgstr "Bienvenido a Data Entry System v2"
+
+#: templates/main/docs.html:8
+msgid "Documentation"
+msgstr "Documentación"
+
+#: templates/main/docs.html:10
+msgid "Data Entry for data entry workers (this part is for you, worker)"
+msgstr ""
+"Entrada de datos para trabajadores de entrada de datos (esta parte es para "
+"ti, trabajador)"
+
+#: templates/main/docs.html:14
+msgid "User registration."
+msgstr "Registro de usuarios."
+
+#: templates/main/docs.html:16
+msgid ""
+"This manual is aimed at basic use by engravers/verifiers, in this first "
+"version.<br/><br/>I will try to guide you through the process of using the "
+"program.<br/>Try to read the entire manual, to avoid difficulties in using "
+"the program at some point.<br/><br/>The first step you must take is to access"
+msgstr ""
+"Este manual está orientado a un uso básico por parte de los grabadores/"
+"verificadores, en esta primera versión.<br/><br/>Intentaré guiarle en el "
+"proceso de utilización del programa.<br/>Intente leer todo el manual, para "
+"evitar dificultades en el uso del programa en algún momento.<br/><br/>El "
+"primer paso que debe dar es acceder a"
+
+#: templates/main/docs.html:16
+msgid "Registration"
+msgstr "Registro"
+
+#: templates/main/docs.html:17
+msgid ""
+"click on the link if you want to register as a user and be able to access "
+"the system or choose the option in the menu in the upper right corner."
+msgstr ""
+"pulse el enlace si desea registrarse como usuario y poder acceder al sistema "
+"o elija la opción del menú de la esquina superior derecha."
+
+#: templates/main/docs.html:18
+msgid "You have to fill in all the fields that appear there."
+msgstr "Tienes que rellenar todos los campos que aparecen allí."
+
+#: templates/main/docs.html:22
+msgid "Surnames"
+msgstr "Apellidos"
+
+#: templates/main/docs.html:23
+msgid "username you choose to log in later"
+msgstr "el nombre de usuario que elijas para conectarte más tarde"
+
+#: templates/main/docs.html:24
+msgid ""
+"password. Try to choose a password that includes letters, numbers and some "
+"symbol such as point, comma, slash... no less than 10 characters."
+msgstr ""
+"contraseña. Intenta elegir una contraseña que incluya letras, números y "
+"algún símbolo como punto, coma, barra... no menos de 10 caracteres."
+
+#: templates/main/docs.html:25
+msgid ""
+"Dropdown with 'Developer' (developer) 'Monitor' (monitor), "
+"'Worker' (recorder/verifier)."
+msgstr ""
+"Desplegable con 'Developer' (desarrollador) 'Monitor' (monitor), "
+"'Worker' (grabador/verificador)."
+
+#: templates/main/docs.html:26
+msgid "We will choose Worker, to be able to record and verify campaigns."
+msgstr "Elegiremos a Worker, para poder registrar y verificar las campañas."
+
+#: templates/main/docs.html:30
+msgid ""
+"We give OK and notify an administrator or person in charge (monitor or "
+"equivalent) of our name and the fact that we have registered."
+msgstr ""
+"Damos el visto bueno y notificamos a un administrador o responsable (monitor "
+"o equivalente) nuestro nombre y el hecho de que nos hemos registrado."
+
+#: templates/main/docs.html:33
+msgid ""
+"The monitor will activate our account and give us access if we register "
+"correctly."
+msgstr ""
+"El monitor activará nuestra cuenta y nos dará acceso si nos registramos "
+"correctamente."
+
+#: templates/main/docs.html:36
+msgid "We can access from Menu >>"
+msgstr "Podemos acceder desde el Menú >>"
+
+#: templates/main/docs.html:38
+msgid ""
+"we enter user/password and if we have the account activated by the monitor, "
+"we can access with our registration data."
+msgstr ""
+"introducimos usuario/contraseña y si tenemos la cuenta activada por el "
+"monitor, podemos acceder con nuestros datos de registro."
+
+#: templates/main/docs.html:42
+msgid "Recording and Verification."
+msgstr "Registro y verificación."
+
+#: templates/main/docs.html:44
+msgid ""
+"After registering and activating your user and before starting the recording "
+"process, get in touch with your monitor so that it assigns you as a recorder "
+"in the project already created and ready to work on it."
+msgstr ""
+"Después de registrar y activar tu usuario y antes de iniciar el proceso de "
+"grabación, ponte en contacto con tu monitor para que te asigne como grabador "
+"en el proyecto ya creado y listo para trabajar en él."
+
+#: templates/main/docs.html:46
+msgid ""
+"If you are a worker or monitor, you can work as a recorder or verifier in "
+"the project, after completing the previous step."
+msgstr ""
+"Si eres trabajador o monitor, puedes trabajar como registrador o verificador "
+"en el proyecto, después de completar el paso anterior."
+
+#: templates/main/docs.html:48
+msgid "Login in the browser, we can access from Menu >> "
+msgstr "Iniciar sesión en el navegador, podemos acceder desde Menú >> "
+
+#: templates/main/docs.html:50
+msgid ""
+"Once this is done, display the menu in the upper right corner of the page"
+msgstr ""
+"Una vez hecho esto, despliegue el menú en la esquina superior derecha de la "
+"página"
+
+#: templates/main/docs.html:52
+msgid ""
+"Choose the Data Entry option to save and Data Verify to save and verify "
+"respectively."
+msgstr ""
+"Elija la opción de Entrada de Datos para guardar y Verificación de Datos "
+"para guardar y verificar respectivamente."
+
+#: templates/main/docs.html:54
+msgid ""
+"We cannot verify if prior to this we did not record information in the "
+"program or project database, that is, we must save the entire project and "
+"then verify it."
+msgstr ""
+"No podemos verificar si antes no registramos la información en la base de "
+"datos del programa o del proyecto, es decir, debemos guardar todo el "
+"proyecto y luego verificar."
+
+#: templates/main/docs.html:56
+msgid ""
+"The project is divided into batches that each user must record or verify "
+"exclusively. It is safer than a single user take charge of your assigned "
+"lots to avoid problems. The same applies to verification. The allocation of "
+"lots will be done speaking directly and organizing the work among the group "
+"of engravers coordinated by the monitor."
+msgstr ""
+"El proyecto se divide en lotes que cada usuario debe registrar o verificar "
+"exclusivamente. Es más seguro que un solo usuario se encargue de sus lotes "
+"asignados para evitar problemas. Lo mismo ocurre con la verificación. La "
+"asignación de lotes se hará hablando directamente y organizando el trabajo "
+"entre el grupo de grabadores coordinados por el monitor."
+
+#: templates/main/docs.html:58
+msgid ""
+"Ignoring this recommendation can bring known bug problems such as "
+"duplication of information or similar that should be avoided to obtain "
+"reliable data at the end of the recording. In the future these bugs will be "
+"corrected but for now they should be avoided in this way."
+msgstr ""
+"Ignorar esta recomendación puede traer problemas de errores conocidos como "
+"la duplicación de información o similares que deben evitarse para obtener "
+"datos fiables al final de la grabación. En el futuro estos errores se "
+"corregirán pero por ahora deben evitarse de esta manera."
+
+#: templates/main/docs.html:60
+msgid ""
+"We must choose a project and a batch in the Data Entry and Data Verify "
+"options before working with them"
+msgstr ""
+"Debemos elegir un proyecto y un lote en las opciones de Entrada de Datos y "
+"Verificación de Datos antes de trabajar con ellos"
+
+#: templates/main/docs.html:62
+msgid ""
+"Once in the recording/verification screen we can make use of several keys "
+"assigned to different tasks that we can consult by  positioning the mouse in "
+"the circle that is on the box with the fields on the right side of the "
+"screen or recording area."
+msgstr ""
+"Una vez en la pantalla de grabación/verificación podemos hacer uso de varias "
+"teclas asignadas a diferentes tareas que podemos consultar posicionando el "
+"ratón en el círculo que hay sobre el recuadro con los campos en la parte "
+"derecha de la pantalla o zona de grabación."
+
+#: templates/main/docs.html:64
+msgid ""
+"If the program throws many errors and/or messages in the recording/"
+"verification process, we can close the windows that appear with errors "
+"pressing the [esc] key several times, clearing the area of ​​the screen "
+"corresponding to said messages."
+msgstr ""
+"Si el programa arroja muchos errores y/o mensajes en el proceso de grabación/"
+"verificación, podemos cerrar las ventanas que aparecen con errores pulsando "
+"la tecla [esc] varias veces, despejando la zona de la pantalla "
+"correspondiente a dichos mensajes."
+
+#: templates/main/docs.html:66
+msgid ""
+"Like [esc] there are many more keys available and useful in the recording "
+"process. Consult them in the help of said screen as commented above."
+msgstr ""
+"Al igual que [esc] hay muchas más teclas disponibles y útiles en el proceso "
+"de grabación. Consúltalas en la ayuda de dicha pantalla como se ha comentado "
+"anteriormente."
+
+#: templates/main/docs.html:68
+msgid ""
+"The RESET button on the recording screen clears the content of the current "
+"record, PREV accesses the previous record and NEXT accesses the next record "
+"as long as the registration is correct and the data is correctly entered. "
+"Otherwise, errors will appear without allowing progress."
+msgstr ""
+"El botón RESET de la pantalla de registro borra el contenido del registro "
+"actual, PREV accede al registro anterior y NEXT accede al siguiente registro "
+"siempre que el registro sea correcto y los datos estén bien introducidos. En "
+"caso contrario, aparecerán errores sin permitir el avance."
+
+#: templates/main/docs.html:70
+msgid ""
+"If the recording is with an image and the OCR/BARCODE option was applied, "
+"the program will have filled in the fields with OCR or BARCODE depending on "
+"the recognition. The job of the recorder or verifier is to modify and "
+"correct the recognized data and fill in the empty fields that remain to be "
+"filled."
+msgstr ""
+"Si la grabación es con una imagen y se ha aplicado la opción OCR/BARCODE, el "
+"programa habrá rellenado los campos con OCR o BARCODE en función del "
+"reconocimiento. El trabajo del grabador o verificador es modificar y "
+"corregir los datos reconocidos y rellenar los campos vacíos que quedan por "
+"rellenar."
+
+#: templates/main/docs.html:72
+msgid ""
+"Once we have filled in all the records of the batch by recording or "
+"verifying, an end of batch message will appear."
+msgstr ""
+"Una vez que hayamos rellenado todos los registros del lote grabando o "
+"verificando, aparecerá un mensaje de fin de lote."
+
+#: templates/main/docs.html:74
+msgid ""
+"There are image management controls (enlarge, reduce, etc...) by means of "
+"the mouse if the recording is with an image"
+msgstr ""
+"Existen controles de gestión de la imagen (ampliar, reducir, etc...) "
+"mediante el ratón si la grabación es con imagen"
+
+#: templates/main/docs.html:76
+msgid ""
+"At this point, we can consult the recording statistics to see our "
+"performance in the project."
+msgstr ""
+"En este punto, podemos consultar las estadísticas de grabación para ver "
+"nuestro rendimiento en el proyecto."
+
+#: templates/main/docs.html:80
+msgid "Statistics."
+msgstr "Estadísticas"
+
+#: templates/main/docs.html:82
+msgid ""
+"The statistics can be consulted from the menu in the upper right corner by "
+"clicking on STATS."
+msgstr ""
+"Las estadísticas pueden consultarse desde el menú de la esquina superior "
+"derecha, haciendo clic en ESTADÍSTICAS."
+
+#: templates/main/docs.html:84
+msgid ""
+"Its use is trivial, the options of the corresponding window are chosen, the "
+"CHART button is clicked and they will appear the corresponding statistics."
+msgstr ""
+"Su uso es trivial, se eligen las opciones de la ventana correspondiente, se "
+"pulsa el botón GRÁFICO y aparecerán las estadísticas correspondientes."
+
+#: templates/main/docs.html:86
+msgid ""
+"Nothing more to add for the recorder/verifier role. Only that you can change "
+"the password from the menu on the top right."
+msgstr ""
+"Nada más que añadir para el rol de grabador/verificador. Sólo que puedes "
+"cambiar la contraseña desde el menú de la parte superior derecha."
+
+#: templates/main/docs.html:88
+msgid ""
+"I hope your experience with the program is satisfactory.<br/>You can make "
+"donations on the help page of the program, DONATE option, for the time and "
+"effort made to develop this program or directly pay me a coffee.</br>You can "
+"also directly on the sourceforge download page, forum option, make comments "
+"about the program as propose new features, report bugs you find for "
+"correction, etc...<br/>You can also write me to the email of the menu option "
+"[about]"
+msgstr ""
+"Espero que tu experiencia con el programa sea satisfactoria.<br/>Puedes "
+"hacer donaciones en la página de ayuda del programa, opción DONATE, por el "
+"tiempo y el esfuerzo realizado para desarrollar este programa o directamente "
+"pagarme un café.</br>También puedes directamente en la página de descarga de "
+"sourceforge, opción foro, hacer comentarios sobre el programa como proponer "
+"nuevas funcionalidades, reportar errores que encuentres para su corrección, "
+"etc...<br/>También puedes escribirme al correo electrónico de la opción del "
+"menú [about]"
+
+#: templates/main/docs.html:93
+msgid "<h4>Thank you for using <b>DATA ENTRY SYSTEM V2</b>. Greetings.</h4>"
+msgstr ""
+"<h4>Gracias por utilizar <b>Sistema de entrada de datos V2</b>. Saludos.</h4>"
+
+#: templates/main/language.html:12
+msgid "Modify Language"
+msgstr "Modificar la lengua"
+
+#: templates/main/login.html:43
+msgid "Logged in"
+msgstr "Conectado"
+
+#: templates/main/password.html:12
+msgid "Modify Password"
+msgstr "Modificar la contraseña"
+
+#: templates/main/projects.html:13
+msgid "Projects"
+msgstr "Proyectos"
+
+#: templates/main/projectusers.html:12
+msgid "saved"
+msgstr "guardado"
+
+#: templates/main/projectusers.html:16
+msgid "Users for"
+msgstr "Usuarios para"
+
+#: templates/main/register.html:65
+msgid "User request sent"
+msgstr "Solicitud de usuario enviada"
+
+#~ msgid "Language:OCR tesseract language (3 chars)"
+#~ msgstr "Idioma:Idioma del teseracto OCR (3 caracteres)"
+
+#~ msgid "Welcome to the Data Entry System."
+#~ msgstr "Bienvenido a Data Entry System v2"
+
+#~ msgid "Load Records/images block "
+#~ msgstr "Bloque de carga de registros/imágenes"
+
+#~ msgid " campaign "
+#~ msgstr "Campañas"
+
+#~ msgid "Load Records/images block %{block_number} campaign %{idcampaign}"
+#~ msgstr ""
+#~ "Cargar registros/imágenes bloque %{block_number} campaña %{idcampaign}"
+
+#~ msgid "guest"
+#~ msgstr "invitado"

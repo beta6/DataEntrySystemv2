@@ -1,0 +1,21 @@
+{% load i18n %}
+<form id="imageselectionform" action="/campaigns/field/imgselect/{{ campaignid }}" method="post">
+	{{ imageSelectionForm.field }}<a id="openImage" class="uk-button uk-button-default uk-width-1-3" href="#">{% trans "Open" %}</a>
+    {{ imageSelectionForm.x1 }}{{ imageSelectionForm.y1 }}{{ imageSelectionForm.x2 }}{{ imageSelectionForm.y2 }}
+    <script>
+    $("#imageselectionform").attr("action", "/campaigns/field/imgselect/"+pad(newcid,4));
+    $("#openImage").click(function(){
+        openImage("{{ campaignid }}");
+        });
+    $("#id_field").on("change", function(){
+       $.get("/campaigns/field/imgselect/{{ campaignid }}/"+$(this).val().toString(), function(selectdata){
+            $("#imageselectlayer").empty().html(selectdata);
+       });
+    });
+    UIkit.util.on(document, 'hide',  '#modal-media-image',function (e) {
+        e.preventDefault();
+        $(".imgareaselect-selection").parent().remove();
+        $(".imgareaselect-outer").remove();
+       });
+    </script>
+</form>

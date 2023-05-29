@@ -1,0 +1,25 @@
+"ByPass by Value: Springen in Abhängigkeit vom Listenwert (YES)"
+"ByPass by Value: Salto segun valor en lista (NO)"
+"ByPass by Value: Abhängig vom Listenwert springen (NEIN)"
+"ByPass: Springen immer"
+"ByPass Blank: Springen, wenn das Feld nicht leer ist"
+"ByPass Bildschirm: Zu einer anderen Seite springen"
+"Alpha-Anpassung: Alphanumerische Anpassung".
+"Kennung auswählen: Schriftlicher Code wählt Text in einem anderen Feld aus"
+"Bezeichner auswählen: Text wählt Code aus"
+"Bezeichner Auswählen: Automatische Auswahl aus Dropdown".
+"Bezeichner Auswählen: Listenmodus. Wenn der Wert nicht existiert, wird er in der Liste erstellt."
+"OCR: Zahl oder Text."
+"OCR: BarCode.
+"Bild: Ausgewählter Bildbereich auf dem Bildschirm für die Dateneingabe."
+"Alphanumerische Maske: Alphanumerische Maske."
+"Numerische Maske: Numerische Maske.
+"Alphanumerische Maske: sprintf: C sprintf Texte und numerische Transformation."
+"To Be verified: N-mal zu VERIFYendes Feld."
+"Erforderlich: Erforderliches Feld."
+"FillAll: FILL FIELD vollständig ausfüllen."
+"ListShowText: Greift Code, zeigt Text in LISTE."
+"MinValue: Ganzzahliger MINIMALER akzeptierter Wert."
+"MaxValue: Ganzzahliger MAXimalwert, der akzeptiert wird."
+"FillOR: Füllt das Feld oder das ausgewählte Feld.
+"ImgPath: Bildpfad im Feld"

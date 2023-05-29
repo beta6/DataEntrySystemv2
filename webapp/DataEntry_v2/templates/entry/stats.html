@@ -1,0 +1,83 @@
+{% extends "main/baselogged.html" %}
+{% load i18n %}
+{% block css %}
+{% endblock %}
+{% block js %}
+<script src="/st/js/jquery.min.js"></script>
+<script type="text/javascript" src="/st/js/loader.js"></script>
+{% endblock %}
+{% block body %}
+            <div uk-alert class="uk-padding"><a class="uk-alert-close" uk-close></a>
+                <div class="uk-container">
+                    <div id="chart"></div>
+                    <div class="uk-container">
+                    <select id="project" class="uk-width-1-6 uk-select">
+                    {% for proj in sprojects %}
+                        <option value="{{ proj.id }}">{{ proj.name }} | {{ proj.idcustomer.name }}</option>
+                    {% endfor %}
+		    <option value="" selected="">{% trans "Select Project" %}</option>
+                    </select>
+                    <select id="user" class="uk-width-1-6 uk-select">
+                    {% for user in users %}
+                        <option value="{{ user.id }}">{{ user.username }} | {{ user.first_name }} {{ user.last_name }}</option>
+                    {% endfor %}
+                        <option value="A">All</option>
+			<option value="" selected="">{% trans "Select User" %}</option>
+                    </select>
+                    <select id="period" class="uk-width-1-6 uk-select">
+                    {% for code, period in periods %}
+                        <option value="{{ code }}">{{ period }}</option>
+                    {% endfor %}
+		    <option value="" selected="">{% trans "Select Time Measure" %}</option>
+                    </select>
+                    <select id="op" class="uk-width-1-6 uk-select">
+                    {% for code, op in ops %}
+                        <option value="{{ code }}">{{ op }}</option>
+                    {% endfor %}
+		    <option value="" selected="">{% trans "Select Operation" %}</option>
+                    </select>
+		    <button class="uk-button uk-button-default uk-width-1-6" type="button" id="btnchart">{% trans "Chart" %}</button>
+                    </div>
+                </div>
+            </div>
+{% endblock %}
+{% block jsbottom %}
+    <script type="text/javascript">
+      var adata;
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(
+		adata
+	);
+
+        var options = {
+          chart: {
+		  title: '{% trans "Data Entry Statistics" %}',
+		  subtitle: '{% trans "Data Entry/Verify" %}',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('chart'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+
+    function chart(data){
+        $("#chart").attr("width", 2*(window.innerWidth/3)).attr("height", 2*(window.innerHeight/3));
+      google.charts.load('current', {'packages':['bar']});
+      adata=data;		    
+      google.charts.setOnLoadCallback(drawChart);
+    }
+
+    $(document).ready(function(){
+	    $("#btnchart").click(function(){
+            var project=$("#project").val(), user=$("#user").val(), period=$("#period").val(), op=$("#op").val();
+            var url="/entry/stats/"+project.toString()+"/"+user.toString()+"/"+period.toString()+"/"+op.toString();
+            var data=$.getJSON(url)
+                .done(function(data){
+                    if(data)
+                        chart(data);
+                });
+            });
+    });
+</script>
+{% endblock %}

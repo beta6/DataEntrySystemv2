@@ -1,0 +1,28 @@
+[
+	{
+		    "pk": 1, 
+		        "model": "auth.user", 
+			    "fields": {
+							"username": "monitor",
+							"first_name": "",
+							"last_name": "",
+							"is_active": true,
+							"is_superuser": false,
+							"is_staff": false,
+							"last_login": "2013-08-16T17:00:58",
+							"groups": [],
+							"user_permissions": [],
+							"password": "pbkdf2_sha256$10000$JJvUDlq19yGM$z/Jz4gZl2uC2x25WyODYrM0bA7q2eyWJBHS+A/6mY3Y=",
+							"email": "",
+							"date_joined": "2013-08-16T17:00:58"
+							}
+	},
+	{
+			"pk": 1,
+				"model": "main.dataentryuser",
+					"fields": {
+								"user": 1,
+								"rol": "MN"
+					}
+	}
+]

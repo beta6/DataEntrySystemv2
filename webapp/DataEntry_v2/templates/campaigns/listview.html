@@ -1,0 +1,39 @@
+{% extends "main/baselogged.html" %}
+{% load i18n %}
+{% block js %}
+<script src="/st/js/jquery.min.js"></script>
+{% endblock %}
+{% block body %}
+<div class="uk-section uk-section-muted uk-dark">
+<div  class="uk-container">
+    <p>{{ lists }}</p>
+    <h4>{% if lists.has_previous %}<a href="/campaigns/lists/view/{{ idlist }}/{{ lists.previous_page_number }}">&lt;</a> {% endif %}{% if lists.has_next %}<a href="/campaigns/lists/view/{{ idlist }}/{{ lists.next_page_number }}">&gt;</a> {% endif %}</h4>
+    <button class="uk-button uk-button-primary" type="button" id="backbtn">{% trans "Lists" %}</button>
+<table id="users_table" class="uk-table uk-table-small uk-table-divider uk-table-responsive uk-table-hover">
+    <thead>
+        <tr>
+            <td>{{ code }}</td>
+            <td>{{ value }}</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for list in lists.object_list %}
+        <tr id="{{ list.list__pk }}">
+            <td>{{ list.code }}</td>
+            <td>{{ list.value }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+</div>
+{% endblock %}
+{% block jsbottom %}
+<script>
+$(document).ready(function(){
+        $('#backbtn').click(function(ev){
+        location.href="/campaigns/lists";
+    });
+});
+</script>
+{% endblock %}

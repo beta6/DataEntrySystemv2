@@ -1,0 +1,624 @@
+{% extends "main/baselogged.html" %}
+{% load i18n %}
+{% load common %}
+{% block css %}
+<link rel="stylesheet" href="/st/js/jquery.guillotine.css" />
+<link rel="stylesheet" href="/st/js/select2.min.css" />
+<style>
+</style>
+{% endblock %}
+{% block js %}
+<script src="/st/js/jquery.guillotine.min.js"></script>
+<script src="/st/js/select2.min.js"></script>
+<script src="/st/js/jquery.mask.min.js"></script>
+<script src="/st/js/sprintf.js"></script>
+{% endblock %}
+{% block body %}
+{% if wimage %}
+<div id="imagebox"  class="uk-width-1-2 uk-container">
+    <img src="" id="pic"/>
+<nav class="uk-navbar-container" uk-navbar>
+    <div id="controls" class="uk-navbar-left">
+      <a href="#" id="rotate_left" uk-tooltip="Rotate left"><span  uk-icon="arrow-left"></span></a>
+      <a href="#" id="zoom_out" uk-tooltip="Zoom out"><span  uk-icon="shrink"></span></a>
+      <a href="#" id="fit" uk-tooltip="Fit image"><span  uk-icon="code"></span></a>
+      <a href="#" id="zoom_in" uk-tooltip="Zoom in"><span  uk-icon="expand"></span></a>
+      <a href="#" id="rotate_right" uk-tooltip="Rotate right"><span  uk-icon="arrow-right"></span></a>
+    </div>
+</nav>
+</div>
+<div  class="uk-width-1-2 uk-container">
+    <div class="uk-light uk-background-secondary uk-padding">
+{% else %}
+<div  class="uk-width-1-2 uk-container">
+</div>
+<div  class="uk-width-1-2 uk-container">
+    <div class="uk-button uk-button-default" type="button" id="btnverify"></div>
+    <div class="uk-light uk-background-secondary uk-padding">
+{% endif %}
+	{% if operation == "V" %}
+	
+
+	<div uk-tooltip="{% trans "title: Keys:<br/> 'alt' show current content <br/> 'ctrl' first field focus<br/> '+' confirm changes<br/> 'esc' close hints<br/> 'enter' next field<br/> 'up key' previous field" %}">
+		<span uk-icon="icon: question">{% trans "Keys" %}</span>
+	</div>
+	<label><input id="toverify" class="uk-checkbox" type="checkbox"> {% trans "verify" %}</label>
+	{% else %}
+	<div uk-tooltip="{% trans "title: Keys:<br/> 'ctrl' first field focus<br/> 'esc' close hints<br/> 'enter' next field<br/> 'up key' previous field" %}">
+		<span uk-icon="icon: question">{% trans "Keys" %}</span>
+	</div>
+	{% endif %}
+        <form id="entryform" action='/entry/entry' method="post" class="uk-form">
+		<button class="uk-button uk-button-default" type="button" id="btnprev">{% trans "Prev" %}</button>
+		<button class="uk-button uk-button-default" type="button" id="btnreset">{% trans "Reset" %}</button>
+		<button class="uk-button uk-button-primary" type="button" id="btngoto">{% trans "Go To Record" %}</button>
+		<button class="uk-button uk-button-primary" type="button" id="btnnext">{% trans "Next" %}</button>
+            {% csrf_token %}
+	    <legend class="uk-legend">{{ project }} ({{ current|add:1 }}/{{ lastRecord  }}) - {% trans "batch" %} {{ nblock }}</legend>
+	     <div class="uk-grid">
+	    {% set ant = "0" %}		     
+            {% for field in form.visible_fields %}
+	        {% set al = field.field.widget.attrs.sline %}
+	    	{% if al != ant %}
+			{% if al != "0" %}
+			{% set ant = al %} 	
+			{% endif %}
+		{% endif %}
+			<div class="{{ field.field.widget.attrs.divuik }}">
+                       {{ field }}
+                       {{ field.errors }}
+			</div>
+            {% endfor %}
+	    	</div>
+                </div>
+            <button class="uk-button uk-button-primary" type="button" id="btnok">Ok</button>
+        </form>
+    </div>
+</div>
+
+
+
+<div id="modal-finished" class="uk-modal-lightbox uk-form-stacked" stack="true" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+		<h2 class="uk-modal-title">{{ project }} {% if operation == "G" %}{% trans "Data Entry Finished" %}{% else %}{% trans "Verification Finished" %}{% endif %}</h2>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+		<button class="uk-button uk-button-primary" type="button" id="btnfinished">{% trans "Ok" %}</button>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block jsbottom %}
+<script>
+var input, n=0, image, pic, imgPos;
+var nextkey = "", max, min;
+
+function gotoRecord() {
+        UIkit.modal.prompt('{% trans "record number to go to?" %}', '1', {center: true, stack: true}).then(function (bnumber) {
+        location.href="/entry/entry?r="+parseInt(bnumber-{{ current  }}-1).toString();
+        });
+}
+
+function validateDNI(dni) {
+  var numero;
+  var letr;
+  var letra;
+  var expresion_regular_dni;
+ 
+  expresion_regular_dni = /^\d{8}[a-zA-Z]$/;
+ 
+  if(expresion_regular_dni.test (dni) == true){
+     numero = dni.substr(0,dni.length-1);
+     letr = dni.substr(dni.length-1,1);
+     numero = numero % 23;
+     letra='TRWAGMYFPDXBNJZSQVHLCKET';
+     letra=letra.substring(numero,numero+1);
+    if (letra!=letr.toUpperCase()) {
+       return [false, "letra del DNI incorrecta"]
+     }else{
+       return [true, "DNI OK"];
+     }
+  }else{
+     return [false,"formato DNI incorrecto"];
+   }
+}
+	function hide(){
+        }
+
+	// limits keypress throttle
+
+	function debounce(fn, delay) {
+  	   var timer = null;
+  	return function () {
+    	   var context = this, args = arguments;
+    	clearTimeout(timer);
+    	timer = setTimeout(function () {
+      	fn.apply(context, args);
+    		}, delay);
+  		};
+	}
+
+        function beep(value){
+            var snd=new Audio("/st/snd/alarm.ogg");
+            snd.play();
+		UIkit.notification("{% trans "Verification: Text doesnt match: " %}"+value, {pos:'top-left', status:'danger', timeout:10000});
+        }
+
+	function boop(data){
+		UIkit.notification("{% trans "Verification: Text OK:" %} "+data, {pos:'top-left', status:'success', timeout:10000});
+	}
+
+	// fill field full
+	
+	function checkFilled(){
+	var ok=true;
+	$("[des-f1]").each(function(){
+		if(parseInt($(this).attr("des-f1"))>$(this).val().length){
+			ok=false;			
+		}
+	});
+	return ok;
+	}
+
+	function hideb(){
+        }
+	
+
+	function checkMinMax(){
+		var ok=true;
+		$("[des-min]").each(function(){
+			if(parseInt($(this).val())<parseInt($(this).attr("des-min")) || parseInt($(this).val())>parseInt($(this).attr("des-max"))){
+				ok=false;
+			}
+		});
+		return ok;
+	}
+
+
+    function checkDNIs(){
+	var rdni=/d$/i;
+	var ok=true;
+	var amsg;
+	$("[des-m1]").each(function(){
+		var desor=$(this).attr("des-or");
+
+		if(rdni.test($(this).attr("des-m1"))){
+			if(desor!=undefined && /^\d+$/.test(desor)){
+			   if($("[des-field="+desor+"]").val().trim().length==0){
+
+			      amsg=validateDNI($(this).val());
+			      if(!amsg[0]){
+			           ok=false;
+			      }
+			   } else if($(this).val().trim().length>0) {
+				   ok=false;
+			   }
+			} else if($(this).attr("required") || $(this).val().length>0) {
+			      amsg=validateDNI($(this).val());
+			      if(!amsg[0]){
+			           ok=false;
+			      }
+			}
+		}});	
+	return ok;
+    }	
+
+
+    function parse(data){
+        var rreverse=/r$/i;
+        var rplaceholder=/^(.*)d$/ig;
+	var rdni=/d$/i;
+	var dni=false;
+        var options;
+	var mask=data;
+	    if(rdni.test(data)){
+		mask=rplaceholder.exec(data)[1];
+            	dni=true;
+	    }
+	options={ translation : { 'O' : {  pattern : /[0-5]/}},
+        placeholder : mask.replace(/0|9|a|s|o|#/gi, "_"),
+	onChange : function(cep) {
+		if(dni)
+		{
+			var v=validateDNI(cep);
+			if(!v[0]){  
+				UIkit.notification('{% trans "Verification: " %}'+v[1], {pos:'top-left', status:'danger', timeout:10000});
+			} else {
+				UIkit.notification('{% trans "Verification: " %}'+v[1], {pos:'top-left', status:'success', timeout:10000});
+
+			}
+		}
+	}
+	};
+
+        return [mask, options]
+    }
+
+    $(document).ready(function(){
+
+	    $("[des-field={{ fmin  }}]").focus();
+
+        input=$("input,select").slice(1);
+	    
+	    $(document).on("keyup", function(ev){			 
+		var gkeycode = (ev.keyCode || ev.which);
+		if( gkeycode == 17 ) { 	// keycode ctrl  
+			$("[des-field={{ fmin }}]").focus();
+		};
+	    });
+
+	// intro to tab
+
+
+	    $("[des-field]").each(function(){
+		$(this).on("keyup", debounce(function(ev){
+		var keycode = (ev.keyCode || ev.which);
+		var ndf=parseInt($(this).attr("des-field"));
+		var nipt=$("[des-field="+(ndf+1)+"]");
+		var pipt=$("[des-field="+(ndf-1)+"]");
+		if(nextkey == ""){	
+			if(keycode == 13 ){  // keycode intro
+				if(nipt.length>0){
+					$(nipt).focus();
+				} else {
+					$("#btnok").click();
+				}
+			} else {
+				if(keycode == 38){     // keycode keyup
+					if(pipt.length>0){
+						$(pipt).focus();
+					} else {
+						$("[des-field={{ fmin }}]").focus();
+					}
+				} else {
+			}
+		};	
+		};
+		}, 250));
+	 });	    
+
+
+        // masks
+	    
+      function applyMask(){
+        $("[des-m1],[des-m2],[des-a1]").each(function(){
+            var dmask;
+            if($(this).attr("des-m1")){
+                dmask=parse($(this).attr("des-m1"));
+                }
+            else if($(this).attr("des-a1")) {
+                dmask=parse($(this).attr("des-a1"));
+                }
+            else {
+                dmask=parse($(this).attr("des-m2"));
+                }
+                $(this).mask(dmask[0],dmask[1]);
+        });
+	
+        $("[des-m3]").each(function(){
+            $(this).focusout(function(){
+                var masked=sprintf($(this).attr("des-m3"), $(this).val());
+                $(this).val(masked);
+                console.log(masked);
+             });
+        });
+	}
+	
+	applyMask();
+
+        // bypass 3
+
+        $("[des-b3-field]").each(function(){
+            var gofield=$(this).attr("des-b3-field");
+            $(this).focusout(function(){
+                $("[des-field='"+gofield.toString()+"']").focus();
+            });
+        });
+
+        // bypass 4
+
+        $("[des-b4-field]").each(function(){
+            var gofield=$(this).attr("des-b4-field");
+            $(this).focusout(function(){
+                if($(this).val().trim()!="")
+                    $("[des-field='"+gofield.toString()+"']").focus();
+            });
+        });
+
+
+        // heavy lists
+
+        $("select:not([des-ajax])").select2({
+                        createSearchChoice:function(term, data) {
+                            if ($(data).filter(function() {
+                                return this.text.localeCompare(term)===0;
+                            }).length===0)
+                            {
+                                if($(this).attr("des-c4"))
+                                    $.get("/entry/lists/"+nlist.toString(), { search:term, create:"y" }, function(data){
+                                        if((data)=="true") console.log("c4 ok");
+                                    });
+                                return {id:term, text:term};
+                            }
+                        },
+                        multiple: false
+                    }
+                    );
+        $("select[des-ajax]").each(function(){
+            var nlist=$(this).attr("des-list");
+            var v;
+            $(this).select2({
+               delay: 250, // wait 250 milliseconds before triggering the request
+               ajax: {
+                     url: '/entry/list/'+nlist.toString(),
+                     dataType: 'json',
+                     data: function (params) {
+                      var query = {
+                        search: params.term,
+                        page: params.page || 1
+                      }
+
+                      // Query parameters will be ?search=[term]&page=[page]
+                      return query;
+                     }
+                     },
+                    createSearchChoice:function(term, data) {
+                        if ($(data).filter(function() {
+                            return this.text.localeCompare(term)===0;
+                        }).length===0)
+                        {
+                                if($(this).attr("des-c4"))
+                                    $.get("/entry/lists/"+nlist.toString(), { search:term, create:"y" }, function(data){
+                                        if((data)=="true") console.log("c4 ok");
+                                    });
+                            return {id:term, text:term};
+                        }
+                    },
+                    multiple: false
+          });
+          v=$(this).attr("des-default");
+          var opt=new Option(v, $(this).attr("des-reg"), true, true);
+          $(this).append(opt);
+          $(this).trigger('change');
+        });
+
+        $("[des-c1]").on("change", function(ev){
+            var fld=$(this).attr("des-c1");
+            var value=$(this).find(':selected').text();
+            var first=value.split(" ", 1);
+            if(first.length>0)
+                first=first[0];
+            var destvalue=value.substring(first.length, value.length);
+            console.log("c1 "+fld+" val "+destvalue);
+            $('[des-field="'+fld+'"]').val(destvalue);
+        });
+
+
+	// load images
+
+	$("[des-img]").each(function(ev){
+		var imgpath='/media/images/entry/{{ projid|stringformat:"04d" }}/{{ nblock|stringformat:"04d"  }}/{{ image }}';
+		$(this).val(imgpath)
+	});
+	    
+		    
+{% if operation == "V" %}
+
+	    $(document).on("keyup", function(ev){			 
+		var gkeycode = (ev.keyCode || ev.which);
+		if( gkeycode == 18 ) { 	// keycode alt  
+			$("#toverify").click();
+		};
+	    });
+
+
+
+
+        // verify
+       
+	var verified = "";
+
+        $("#btnok").click(function(ev){
+            var ok=true, msg="";
+            $("input[des-field]").each(function(){
+		    if(($(this).filter("[des-v1]").length>0) && (parseInt($(this).attr("des-v1"))>0) && ($(this).val()==null || $(this).val().trim().length==0 || $(this).cleanVal().length==0)) { 
+                        ok=false;
+			    msg+="{% trans " empty field(s)" %}";
+                    }
+            });
+	    if(!checkFilled()){
+		    ok=false;
+		    msg+="{% trans " not filled in fields" %}";
+	    }
+	    if(!checkMinMax()){
+		    ok=false;
+		    msg+="{% trans " value out of range" %}";
+	    }
+	    if(!checkDNIs()){
+		    ok=false;
+		    msg+=" error en DNI";
+	    }	
+		if(ok){
+                $("#entryform").submit();
+		} else {
+                ev.preventDefault();
+		$("[des-field={{ min }}]").focus();
+		beep(msg);
+                }
+        });
+
+	$("#toverify").click(function(ev){
+	$("[des-v1]").each(function(){
+		if($("#toverify").is(":checked"))
+		{
+			if($(this).attr("des-tempvf")){
+				$(this).val($(this).attr("des-tempvf"));
+			} else {
+				$(this).val("");
+			}
+		} else {
+			$(this).attr("des-tempvf", $(this).val());
+        	    	var data=$(this).attr("des-default");
+            		$(this).val(data);
+		}
+		applyMask();
+	});
+	});
+
+	$("[des-v1]").each(function(){
+            var reps=parseInt($(this).attr("des-v1"));
+            var data=$(this).attr("des-default");
+            $(this).on("keyup", function(event){
+                verified=$(this).val();
+		var isok=true;
+		var re=/[^\w]/g;
+		var keycode = event.keyCode ;    
+			
+		if( keycode == 27 ){
+			UIkit.notification.closeAll();
+			event.preventDefault();
+			return;
+		}	
+		    
+			evkey = event.key;
+			applyMask();
+			verified+=evkey;
+			verified=$(this).masked(verified.replace(re,"" ));
+		    isok = ((data.substr(0,verified.length))==verified && ((data.length>0 && verified.length>0) || (data.length==0)));
+
+	       if(keycode == 107 && nextkey != "" && !isok ){
+		    data = $(this).val();
+		    $(this).attr("des-default", data);
+		    nextkey="";
+		    isok=true;	
+		       boop('{% trans " corrected data : " %}'+data);   
+		} 
+				
+		if(!isok){
+                    beep(data);
+		    nextkey = evkey;
+		    $(this).focus();
+		    event.preventDefault();
+                } else {
+		    nextkey = "";	
+		    boop(data);	
+                    }
+            });
+        });
+
+{% if edits == None %}
+$("#toverify").click();
+$(input[0]).focus();
+{% endif %}
+
+{% else %}
+
+        $("#btnok").click(function(ev){
+	    var ok=true, msg="";			
+	    if(!checkFilled()){
+		    ok=false;
+		    msg+='{% trans " not all required fields filled in" %}';
+	    }
+	    if(!checkMinMax()){
+		    ok=false;
+		    msg+='{% trans " value out of range" %}';
+	    }
+	    if(!checkDNIs()){
+		    ok=false;
+		    msg+=" error en DNI";
+	    }	
+    	    if(ok){
+                $("#entryform").submit();
+		}
+            else {
+                ev.preventDefault();
+                $(input[0]).focus();
+		beep(msg);
+                }
+            });
+{% endif %}
+	
+	$("#btngoto").click(function(ev){
+		gotoRecord();
+	});
+
+
+	$("#btnnext").click(function(ev){
+		$("#btnok").click();
+	});
+
+
+        // reset
+
+        $("#btnreset").click(function(){
+            $("[des-default]").each(function(){
+                $(this).val($(this).attr("des-default"));
+            });
+        });
+
+        // end of data entry
+
+image='/media/images/entry/{{ projid|stringformat:"04d" }}/{{ nblock|stringformat:"04d"  }}/{{ image }}';
+
+        $("#btnfinished").click(function(){
+            location.href="/entry/stats";
+        });
+
+        // prev record
+
+        $("#btnprev").click(function(){
+            location.href="/entry/entry?r=-1";
+        });
+    {% if finished %}
+        UIkit.modal("#modal-finished").show();
+    {% endif %}
+    {% if wimage %}
+
+        // image
+
+        var tmpImg = new Image();
+        var camelize = function() {
+            var regex = /[\W_]+(.)/g
+            var replacer = function (match, submatch) { return submatch.toUpperCase() }
+            return function (str) { return str.replace(regex, replacer) }
+          }();
+
+        imgPos={{ imgPos }};
+        tmpImg.src=image;
+
+       function imageWin(dims){
+            pic.guillotine({ width:window.innerWidth/2, height: window.innerHeight/2, init:{ x:dims[0]+10, y:dims[1]+10, width:dims[2], height:dims[3] }});
+            // Bind actions
+            $('#controls a').click(function(e) {
+              e.preventDefault();
+              action = camelize(this.id);
+              pic.guillotine(action);
+            });
+            console.log(dims);
+        }
+
+        pic=$("#pic");
+        tmpImg.onload = function() {
+            pic.guillotine("enable");
+            imageWin(imgPos[0]);
+
+            n=0;
+            $("[des-field]").each(function(){
+                var dim=imgPos[n];
+                $(this).on("focus", function(){
+                    pic.guillotine("remove");
+                    imageWin(dim);
+                });
+                n+=1;
+            });
+
+        };
+        $(pic).attr("src", image);
+        {% endif %}
+        $(input[0]).focus();
+    });
+</script>
+{% endblock %}

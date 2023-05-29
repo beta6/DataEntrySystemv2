@@ -1,0 +1,95 @@
+{% extends basetemplate %}
+{% load i18n %}
+{% block body %}
+<div class="uk-section uk-section-primary">
+    <div class="uk-container uk-text-large">
+            <article class="uk-article"><a class="uk-alert-close" uk-close></a>
+
+<h3 class="uk-article-title">{% trans "Documentation" %}</h3>
+
+<h3 class="uk-article-title">{% trans "Data Entry for data entry workers (this part is for you, worker)" %}</h3>
+
+<ul uk-accordion="multiple: true">
+    <li>
+        <a class="uk-accordion-title" href="#">{% trans "User registration." %}<br/></a>
+        <div class="uk-accordion-content">
+<p>{% trans "This manual is aimed at basic use by engravers/verifiers, in this first version.<br/><br/>I will try to guide you through the process of using the program.<br/>Try to read the entire manual, to avoid difficulties in using the program at some point.<br/><br/>The first step you must take is to access" %}<a href="/main/register" target="_blank">{% trans "Registration" %}</a><br/>
+{% trans "click on the link if you want to register as a user and be able to access the system or choose the option in the menu in the upper right corner." %}<br/>
+<br/>{% trans "You have to fill in all the fields that appear there." %}<br/>
+<br/>
+<ol>
+<li> {% trans "Name" %}</li>
+<li> {% trans "Surnames" %}</li>
+<li> {% trans "username you choose to log in later" %}</li>
+<li> {% trans "password. Try to choose a password that includes letters, numbers and some symbol such as point, comma, slash... no less than 10 characters." %}</li>
+<li> {% trans "Dropdown with 'Developer' (developer) 'Monitor' (monitor), 'Worker' (recorder/verifier)." %}</li>
+<li> {% trans "We will choose Worker, to be able to record and verify campaigns." %}</li>
+</ol>
+
+<br/>
+{% trans "We give OK and notify an administrator or person in charge (monitor or equivalent) of our name and the fact that we have registered." %}
+
+<br/>
+{% trans "The monitor will activate our account and give us access if we register correctly." %}
+
+<br/>
+{% trans "We can access from Menu >>" %} <a href="/main/login" target="_blank"> Login </a>
+<br/>
+{% trans "we enter user/password and if we have the account activated by the monitor, we can access with our registration data." %}</p>
+</div>
+    </li>
+    <li>
+        <a class="uk-accordion-title" href="#">{% trans "Recording and Verification." %}<br/></a>
+        <div class="uk-accordion-content">
+<p>{% trans "After registering and activating your user and before starting the recording process, get in touch with your monitor so that it assigns you as a recorder in the project already created and ready to work on it." %}</p>
+
+<p>{% trans "If you are a worker or monitor, you can work as a recorder or verifier in the project, after completing the previous step." %}</p>
+
+<p>{% trans "Login in the browser, we can access from Menu >> " %}<a href="/main/login" target="_blank"> Login </a></p>
+
+<p>{% trans "Once this is done, display the menu in the upper right corner of the page" %}</p>
+
+<p>{% trans "Choose the Data Entry option to save and Data Verify to save and verify respectively." %}</p>
+
+<p>{% trans "We cannot verify if prior to this we did not record information in the program or project database, that is, we must save the entire project and then verify it." %}</p>
+
+<p>{% trans "The project is divided into batches that each user must record or verify exclusively. It is safer than a single user take charge of your assigned lots to avoid problems. The same applies to verification. The allocation of lots will be done speaking directly and organizing the work among the group of engravers coordinated by the monitor." %}</p>
+
+<p>{% trans "We must choose a project and a batch in the Data Entry and Data Verify options before working with them" %}</p>
+
+<p>{% trans "Once in the recording/verification screen we can make use of several keys assigned to different tasks that we can consult by  positioning the mouse in the circle that is on the box with the fields on the right side of the screen or recording area." %}</p>
+
+<p>{% trans "If the program throws many errors and/or messages in the recording/verification process, we can close the windows that appear with errors pressing the [esc] key several times, clearing the area of ​​the screen corresponding to said messages." %}</p>
+
+<p>{% trans "Like [esc] there are many more keys available and useful in the recording process. Consult them in the help of said screen as commented above." %}</p>
+
+<p>{% trans "The RESET button on the recording screen clears the content of the current record, PREV accesses the previous record and NEXT accesses the next record as long as the registration is correct and the data is correctly entered. Otherwise, errors will appear without allowing progress." %}</p>
+
+<p>{% trans "If the recording is with an image and the OCR/BARCODE option was applied, the program will have filled in the fields with OCR or BARCODE depending on the recognition. The job of the recorder or verifier is to modify and correct the recognized data and fill in the empty fields that remain to be filled." %}</p>
+
+<p>{% trans "Once we have filled in all the records of the batch by recording or verifying, an end of batch message will appear." %}</p>
+
+<p>{% trans "There are image management controls (enlarge, reduce, etc...) by means of the mouse if the recording is with an image" %}</p>
+
+<p>{% trans "At this point, we can consult the recording statistics to see our performance in the project." %}</p>
+</div>
+    </li>
+    <li>
+        <a class="uk-accordion-title" href="#">{% trans "Statistics." %}<br/></a>
+        <div class="uk-accordion-content">
+<p>{% trans "The statistics can be consulted from the menu in the upper right corner by clicking on STATS." %}</p>
+
+<p>{% trans "Its use is trivial, the options of the corresponding window are chosen, the CHART button is clicked and they will appear the corresponding statistics." %}</p>
+
+<p>{% trans "Nothing more to add for the recorder/verifier role. Only that you can change the password from the menu on the top right." %}</p>
+
+<p>{% trans "I hope your experience with the program is satisfactory.<br/>You can make donations on the help page of the program, DONATE option, for the time and effort made to develop this program or directly pay me a coffee.</br>You can also directly on the sourceforge download page, forum option, make comments about the program as propose new features, report bugs you find for correction, etc...<br/>You can also write me to the email of the menu option [about]" %}</p>
+</div>
+    </li>
+</ul>
+<p>{% trans "Access to Full Docs in the web : " %}<a href="https://desv2.tuxrincon.com/" target="_blank">https://desv2.tuxrincon.com/</a></p>
+</article>
+            </div>
+</div>
+</div>
+{% endblock %}

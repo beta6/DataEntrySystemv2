@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Data Entry System v2 |{% block title %}{% endblock %}</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/st/css/uikit.min.css" />
+{% block css %}
+{% endblock %}
+        <script src="/st/js/uikit.min.js"></script>
+        <script src="/st/js/uikit-icons.min.js"></script>
+{% block js %}
+{% endblock %}
+    </head>
+    <body>
+<div class="uk-container uk-container-expand uk-light uk-background-secondary"><nav class="uk-navbar"><div class="uk-navbar-left"><a href="/main" class="uk-navbar-item uk-logo"><img src="/st/img/des2.png" class="uk-margin-small-right"> Data Entry System v2
+                    </a></div> <div class="uk-navbar-right">
+<ul class="uk-subnav">
+    <li>
+        <a href="#">
+            <span uk-icon="icon: menu"> Menu </span>
+        </a>
+        <div uk-dropdown="mode: hover;">
+            <ul class="uk-nav uk-dropdown-nav">
+                <li class="uk-nav-header">Menu Options</li>
+                <li><a href="/main/login"><span  uk-icon="icon: sign-in"></span> Login</a></li>
+                <li><a href="/main/register"><span  uk-icon="icon: user"></span> Register</a></li>
+                <li class="uk-nav-divider"><span ></span></li>
+                <li><a href="/main/docs"><span uk-icon="icon: question"></span> Docs</a></li>
+                <li><a href="/main/about"><span  uk-icon="icon: info"></span> About</a></li>
+            </ul>
+        </div>
+    </li>
+</ul>
+    {% block baroptions %}
+    {% endblock %}
+     </div></nav></div>
+
+        <div class="uk-background-cover uk-text-center uk-height-viewport uk-flex uk-flex-center uk-flex-middle" style="background-image: url(/st/img/teclado.png);">
+            {% block body %}
+            {% endblock %}
+        </div>
+{% block jsbottom %}
+{% endblock %}
+    </body>
+</html>

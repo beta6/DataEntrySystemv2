@@ -1,0 +1,47 @@
+{% extends "main/baselogged.html" %}
+{% load i18n %}
+{% load template_filters %}
+{% block js %}
+<script src="/st/js/jquery.min.js"></script>
+{% endblock %}
+{% block body %}
+<div class="uk-section uk-section-muted uk-dark">
+    <div  class="uk-container">
+        <table class="uk-table uk-table-small uk-table-divider uk-table-hover">
+        <thead>
+            <tr>
+		    <th>{% trans "Projects" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in projects %}
+	    {% if showblocks == True %}
+	    {% if ismonitor == True %}
+	    {% with dblocks|get_item:project.id as db %}
+	    {% for d in db %}
+            <tr><td>
+			    <a class="uk-link-heading" href="{{ d.0 }}">{{ project.name }} : {{ d.1 }}</a></td><td> {{ project.idcustomer.name }}
+		    </td><td>{{ d.2  }}</td></tr>
+	    {% endfor %}
+	    {% endwith %}
+	    {% else  %}
+	    {% with dblocksusr|get_item:project.id as db %}
+	    {% for d in db %}
+            <tr><td>
+			    <a class="uk-link-heading" href="{{ d.0 }}">{{ project.name }} : {{ d.1 }}</a></td><td> {{ project.idcustomer.name }}
+		    </td><td>{{ d.2 }}</td></tr>
+	    {% endfor %}
+	    {% endwith %}
+
+	    {% endif %}
+	    {% else %}
+            <tr><td>
+			    <a class="uk-link-heading" href="{{ urls  }}{{ project.id }}">{{ project.name }}</a></td><td> {{ project.idcustomer.name }}
+            </td></tr>
+	    {% endif %}
+	    {% endfor %}
+        </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

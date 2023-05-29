@@ -1,0 +1,39 @@
+{% extends "main/baselogged.html" %}
+{% load i18n %}
+{% block js %}
+<script src="/st/js/jquery.min.js"></script>
+{% endblock %}
+{% block body %}
+<div class="uk-section uk-section-muted uk-dark">
+    <div  class="uk-container">
+        <form id="frmselusers" action="/main/project/{{ projid }}" method="post" class="uk-form-stacked">
+		<button class="uk-button uk-button-default uk-modal-close" type="button" id="btncancel">{% trans "Cancel" %}</button>
+		<button id="btnsave" class="uk-button uk-button-primary" type="submit">{% trans "Save" %}</button>
+		{% if saved %}<h4>{% trans "saved" %}</h4>{% endif %}
+        <table class="uk-table uk-table-small uk-table-divider uk-table-hover">
+        <thead>
+            <tr>
+		    <th colspan="4">{% trans "Users for" %} {{ proj.name }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in selected %}
+            <tr><td><input type="checkbox" class="uk-checkbox" value="{{ user.user.id }}" name="checks[]" checked="checked"></td><td>{{ user.user.username }}</td><td>{{ user.user.first_name }}</td><td>{{ user.user.last_name }}</td></tr>
+            {% endfor %}
+            {% for user in users %}
+            <tr><td><input type="checkbox" class="uk-checkbox" value="{{ user.user.id }}" name="checks[]"></td><td>{{ user.user.username }}</td><td>{{ user.user.first_name }}</td><td>{{ user.user.last_name }}</td></tr>
+            {% endfor %}
+        </tbody>
+        </table>
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block jsbottom%}
+<script>
+$(document).ready(function(){
+    $("#btncancel").click(function(){ location.href="/main/project"; });
+    {% if saved %}location.href="/main/project";{% endif %}
+});
+</script>
+{% endblock %}

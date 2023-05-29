@@ -1,0 +1,463 @@
+{% extends "main/baselogged.html" %}
+{% load i18n %}
+{% block css %}
+<link rel="stylesheet" href="/st/css/imgareaselect-default.css" />
+{% endblock %}
+{% block js %}
+<script src="/st/js/jquery.imgareaselect.min.js"></script>
+<script type="text/javascript">
+
+    var ratio=window.innerHeight/2018;
+    var ratio2=2018/window.innerHeight;
+    var width=1200*ratio;
+    var newcid="{{ campaignid }}";
+    var newblk="{{ blocknumber }}";
+
+    function startImgSelect(x1, y1, x2, y2){
+        var dopts={};
+        if(x1==0 || x1=="") {
+            dopts={
+                onSelectEnd: function (img, selection) {
+                    $('input[name="x1"]').val(parseInt(selection.x1*ratio2));
+                    $('input[name="y1"]').val(parseInt(selection.y1*ratio2));
+                    $('input[name="x2"]').val(parseInt(selection.x2*ratio2));
+                    $('input[name="y2"]').val(parseInt(selection.y2*ratio2));
+                    submitImageSelection("#imageselectionform");
+            }
+        }
+
+        } else {
+            dopts={ x1: x1, y1: y1, x2: x2, y2: y2,
+                onSelectEnd: function (img, selection) {
+                    $('input[name="x1"]').val(parseInt(selection.x1*ratio2));
+                    $('input[name="y1"]').val(parseInt(selection.y1*ratio2));
+                    $('input[name="x2"]').val(parseInt(selection.x2*ratio2));
+                    $('input[name="y2"]').val(parseInt(selection.y2*ratio2));
+                    submitImageSelection("#imageselectionform");
+                }
+            };
+        }
+        $('#selectionimage').imgAreaSelect(dopts);
+    }
+
+    function submitImageSelection(frmprop){
+        var form = $(frmprop);
+        var url = form.attr('action');
+        $.ajax({
+                   type: "POST",
+                   url: url,
+                   data: form.serialize(),
+                   success: function(data)
+                   {
+                        UIkit.modal.alert('<p>saved!</p>',  {center: true, stack: true}).then(function(){
+                            $(".imgareaselect-selection").parent().remove();
+                            $(".imgareaselect-outer").remove();
+                            UIkit.modal("#modal-media-image").hide();
+                        });
+                   },
+                   error: function(data){
+
+                   }
+        });
+    }
+
+    function pad (str, max) {
+      str = str.toString();
+      return str.length < max ? pad("0" + str, max) : str;
+    }
+
+    function openImage(cid){
+        $("#imagelayer").html('<button class="uk-modal-close-default" type="button" uk-close></button><img id="selectionimage" src="/media/images/entry/'+pad(cid, 4)+'/00000000.jpg" height="'+window.innerHeight.toString()+'" width="'+width.toString()+'">');
+        UIkit.modal("#modal-media-image").show();
+        var x1=parseInt($('input[name="x1"]').val()*ratio);
+        var y1=parseInt($('input[name="y1"]').val()*ratio);
+        var x2=parseInt($('input[name="x2"]').val()*ratio);
+        var y2=parseInt($('input[name="y2"]').val()*ratio);
+        startImgSelect(x1, y1, x2, y2);
+    }
+
+    function refreshFields(){
+        $.get("/campaigns/fields/"+newcid, function(fldsdata){
+            $(".fldsbody").remove();
+            $("#fieldsheader").append(fldsdata);
+        });
+     }
+
+    function submitForm(idbtn, tag2load, formid, modalid, fieldno) {
+        $(idbtn).off('click');
+        $(idbtn).on("click", function(evt){
+            $(this).prop("disabled",true);
+            var form = $(formid);
+            var url = form.attr('action');
+            $("#id_fieldNum").val(fieldno);
+            $.ajax({
+                   type: "POST",
+                   url: url,
+                   data: form.serialize(), // serializes the form's elements.
+                   success: function(data)
+                   {
+                        jdata=JSON.parse(data);
+                        if(jdata.isok){
+                            UIkit.modal(modalid).hide();
+                            refreshFields();
+                            evt.preventDefault();
+                        } else {
+                            $(tag2load).html(jdata.data);
+                            evt.preventDefault();
+                        }
+                    }
+        });
+        });
+    }
+
+    function loadForm(idbtn, tag2load, modalid, fieldno) {
+        $("body").off("click", idbtn);
+        $(idbtn).on("click", function(evt){
+            var url="/campaigns/field/"+newcid;
+            $.get(url+"/"+fieldno.toString(), function(d){
+                data=JSON.parse(d);
+                $(tag2load).html(data.data);
+            });
+            submitForm("#acceptfields", "#loadfields", "#frmfield", "#modal-fields", fieldno);
+            $("#acceptfields").prop("disabled",false);
+            UIkit.modal(modalid).show();
+            evt.preventDefault();
+        });
+    }
+
+    function editForm(idbtn, tag2load, url, modalid, fieldno) {
+            $.get(url, function(d){
+                data=JSON.parse(d);
+                $(tag2load).html(data.data);
+            });
+            submitForm("#acceptfields", "#loadfields", "#frmfield", "#modal-fields", fieldno);
+            $("#acceptfields").prop("disabled",false);
+            UIkit.modal(modalid).show();
+    }
+
+    function rmField(idbtn, tag2load, url, modalid, fieldno) {
+	    UIkit.modal.confirm('{% trans "Are you sure?" %}',  {center: true, stack: true}).then(function(){
+            $.ajax({
+                   type: "GET",
+                   url: url,
+                   success: function(data)
+                   {
+                        refreshFields();
+                    },
+                    error: function(data){
+                        refreshFields();
+                    }
+        });
+        });
+        evt.preventDefault();
+
+    }
+
+    function addProperty(frmprop, layerprop, fieldNum){
+        var form = $(frmprop);
+        var url = form.attr('action');
+        $.ajax({
+                   type: "POST",
+                   url: url,
+                   data: form.serialize(),
+                   success: function(data)
+                   {
+                        $(layerprop).empty();
+                        propertiesEdit("#propertieslayer", "/campaigns/field/props/"+pad(newcid,4)+"/"+fieldNum.toString());
+                   },
+                   error: function(data){
+
+                   }
+        });
+    }
+
+    function removeProperty(url, fieldnum){
+        $.get(url, function(fldsdata){
+            propertiesEdit("#propertieslayer", "/campaigns/field/props/"+pad(newcid,4)+"/"+fieldnum.toString(), fieldnum);
+        });
+    }
+
+    function submitProperty(frmprop){
+        var form = $(frmprop);
+        var url = form.attr('action');
+        $.ajax({
+                   type: "POST",
+                   url: url,
+                   data: form.serialize(),
+                   success: function(data)
+                   {
+                        refreshFields();
+                   },
+                   error: function(data){
+
+                   }
+        });
+    }
+
+
+
+    function propertiesEdit(loadFrame, url, fieldnum){
+        $.get(url, function(fldsdata){
+            $(loadFrame).empty();
+            $(loadFrame).append(fldsdata);
+        });
+    }
+
+
+</script>
+{% endblock %}
+{% block body %}
+<div id="modal-group-1" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title">{% trans "Campaign" %}</h2>
+        </div>
+        <div class="uk-modal-body">
+            <form id="frmcampaign" action="/campaigns/campaign/{{ campaignid }}" method="post" class="uk-form-stacked">
+
+                <div class="uk-margin">
+                    <div class="uk-form-controls">
+                    {{ campaignform.name }}
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <div class="uk-form-controls">
+                    {{ campaignform.customer }}
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <div class="uk-form-controls">
+                    {{ campaignform.isImage }} {% trans "Image Project" %}
+                    </div>
+                </div>
+            </form>
+        <div class="uk-modal-footer uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+            <button id="campaignnext" class="uk-button uk-button-primary">Next</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="modal-group-2" class="uk-modal-full"  uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title">Images</h2>
+        </div>
+        <div class="uk-modal-body">
+                    <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
+                        <div id="imgshow" class="uk-background-cover" style="background-image: url('/st/img/nophoto.png');" uk-height-viewport></div>
+                        <div class="uk-padding-large">
+                        <div class="uk-margin">
+                            <div class="uk-form-controls">
+                            <div><p>{% trans "Load a .jpg file that will be used as base model for Data Entry.<br/>Images in batches, later will be of the same type as this one. Same size, same design, same fields." %}</p></div>
+                            <form id="frmimgfile" method="post" action="/campaigns/imgfile/" enctype="multipart/form-data">
+                                <div class="js-upload" uk-form-custom>
+                                    {{ imgfileform.file }}
+				    <button class="uk-button uk-button-default" tabindex="-1">{% trans "Select File" %}</button>
+                                </div>
+				<button id="submitimages" class="uk-button uk-button-default">{% trans "Load Images" %}</button>
+                            </form>
+                            <div uk-lightbox stack="true">
+				    <a class="uk-button uk-button-default" href="/media/images/entry/" id="showimagebtn">{% trans 'Image' %}</a>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+		<a href="#modal-group-1" class="uk-button  uk-button-default" uk-toggle>{% trans "Previous" %}</a>
+		<button class="uk-button uk-button-default uk-modal-close" type="button">{% trans "Cancel" %}</button>
+		<a id="imagesnext" href="#modal-group-3" class="uk-button uk-button-primary" uk-toggle>{% trans "Next" %}</a>
+        </div>
+    </div>
+</div>
+
+<div id="modal-group-3" class="uk-modal-full"  uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+		<h2 class="uk-modal-title">{% trans "Fields and Properties" %}</h2>
+        </div>
+        <div class="uk-modal-body" uk-grid>
+<div class="uk-width-1-2">
+<table class="uk-table uk-table-hover uk-table-divider">
+<thead>
+            <tr>
+                <td><a href="#modal-fields" id="addfieldrecord"><span uk-icon="icon: plus-circle"></span></a></td>
+    {% for fieldtitle in fieldstitles %}
+                <td>{{ fieldtitle }}</td>
+    {% endfor %}
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+</thead>
+<tbody id="fieldsheader">
+</tbody>
+</table>
+</div>
+<div id="propertieslayer" class="uk-card uk-card-default uk-card-body uk-width-1-2" uk-grid>&nbsp;</div>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <a id="prevfieldsprops" href="#modal-group-2" class="uk-button uk-button-default" uk-toggle>Previous</a>
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+            <a id="nextfieldsprops" href="#modal-group-4" class="uk-button uk-button-primary" uk-toggle>Next</a>
+        </div>
+    </div>
+</div>
+
+<div id="modal-media-image" class="uk-modal-full uk-form-stacked" stack="true" uk-modal>
+    <div id="imagelayer" class="uk-modal-dialog">
+
+    </div>
+</div>
+
+<div id="modal-fields" class="uk-modal-lightbox uk-form-stacked" stack="true" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+		<h2 class="uk-modal-title">{% trans "Add Field" %}</h2>
+        </div>
+        <div class="uk-modal-body">
+            <div id="loadfields"></div>
+        <div class="uk-modal-footer uk-text-right">
+		<button class="uk-button uk-button-default uk-modal-close" type="button">{% trans "Cancel" %}</button>
+		<button id="acceptfields" class="uk-button uk-button-primary" type="button" >{% trans "Ok" %}</button>
+        </div>
+        </div>
+        </div>
+    </div>
+
+
+<div id="modal-group-4" class="uk-modal-full" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+		<h2 class="uk-modal-title">{% trans "Image Position" %}</h2>
+
+        </div>
+        <div id="imageselectlayer" class="uk-width-auto uk-margin-auto-vertical">
+         </div>
+        <div class="uk-modal-footer uk-text-right">
+		<a href="#modal-group-3" class="uk-button uk-button-default" uk-toggle>{% trans "Previous" %}</a>
+		<button class="uk-button uk-button-default uk-modal-close" type="button">{% trans "Cancel" %}</button>
+		<a href="#modal-group-5" class="uk-button uk-button-primary" uk-toggle>{% trans "Next" %}</a>
+        </div>
+    </div>
+</div>
+
+
+<div id="modal-group-5" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title">Done</h2>
+        </div>
+        <div class="uk-modal-body">
+		<p>{% trans "Project ready to use." %}</p>
+		<p>{% trans "Now, click populate and OCR option to clear database and fill ocr data." %}</p>
+            <div id="populatemsg"></div>
+            <div id="ocrmsg"></div>
+            <div id="loaddatamsg"></div>
+	    <button class="uk-button uk-button-default " type="button" id="loaddatabtn">{% trans "Load Data from CSV into Database" %}</button>
+        <div class="uk-modal-footer uk-text-right">
+		<a id="prevdone" href="#modal-group-4" class="uk-button uk-button-default" uk-toggle>{% trans "Previous" %}</a>
+		<button class="uk-button uk-button-default uk-modal-close" type="button">{% trans "Cancel" %}</button>
+		<a href="#" class="uk-button uk-button-primary uk-modal-close">{% trans "Done" %}</a>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}
+{% block jsbottom %}
+<script>
+    $(document).ready(function(){
+        $("#id_id").val(0);
+
+        $("body").off("click", "#campaignnext");
+        $("#campaignnext").on("click", function(ev){
+                var form = $("#frmcampaign");
+                var url = form.attr('action');
+                ev.preventDefault();
+                $.ajax({
+                       type: "POST",
+                       url: url,
+                       data: form.serialize(), // serializes the form's elements.
+                       success: function(data)
+                       {
+                            var test=/ok/i;
+                            if(test.test(data)){
+                                newcid=data.split(" ")[1];
+                                UIkit.modal("#modal-group-1").hide();
+                                if($("#id_isImage").is(":checked")){
+                                    $("#prevfieldsprops").attr("href", "#modal-group-2");
+                                    $("#nextfieldsprops").attr("href", "#modal-group-4").click(function(ev){
+                                       $.get("/campaigns/field/imgselect/"+newcid, function(selectdata){
+                                            $("#imageselectlayer").empty().html(selectdata);
+                                       })
+                                    });
+                                    $("#prevdone").attr("href", "#modal-group-4");
+                                    UIkit.modal("#modal-group-2").show();
+                                    }
+                                else {
+                                    $("#prevfieldsprops").attr("href", "#modal-group-1");
+                                    $("#nextfieldsprops").attr("href", "#modal-group-5");
+                                    $("#prevdone").attr("href", "#modal-group-3");
+                                    UIkit.modal("#modal-group-3").show();
+                                    }
+                            }
+                       },
+                       error: function (data) {
+                       },
+                       async: false
+                     });
+        ev.preventDefault();
+        });
+
+        $("#submitimages").click(function(ev){
+                var form = $("#frmimgfile");
+		var url = form.attr('action')+newcid;
+                var fd = new FormData(document.getElementById("frmimgfile"));
+                fd.append("label", "WEBUPLOAD");
+		/*
+		if(newblk.length>0) {
+			url+="/"+newblk;
+		}
+		*/
+		$("#frmimgfile").append('<p id="msg" uk-spinner>{% trans "Loading file..." %}</p>');
+                $.ajax({
+                       type: "POST",
+                       url: url,
+                       processData: false,  // tell jQuery not to process the data
+                       contentType: false,   // tell jQuery not to set contentType
+                       data: fd,
+                       success: function(data)
+                       {
+                            var test=/ok/i;
+                            if(test.test(data)){
+        			    $("#showimagebtn").attr("href", "/media/images/entry/"+pad(newcid,4)+"/00000000.jpg");
+				    $("#imgshow").replaceWith('<div id="imgshow" class="uk-background-cover" style="background-image: url(\'/media/images/entry/'+pad(newcid,4)+'/00000000.jpg\');" uk-height-viewport></div>');
+                                $("#msg").remove();
+				    $("#frmimgfile").append('<p>{% trans "Images Loaded" %}</p>');
+                            } else {
+                                $("#frmimgfile").append('<p>'+data+'</p>');
+                                ev.preventDefault();
+                            }
+                       },
+                       error: function (data) {
+                       },
+                     });
+        ev.preventDefault();
+        });
+
+        loadForm("#addfieldrecord", "#loadfields", "#modal-fields", 0);
+        refreshFields();
+
+        UIkit.modal("#modal-group-1").show();
+    });
+</script>
+{% endblock %}

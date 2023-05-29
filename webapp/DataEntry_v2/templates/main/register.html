@@ -1,0 +1,72 @@
+{% extends "main/base.html" %}
+{% load i18n %}
+{% block title %} {% trans "Register" %}{% endblock %}
+{% block baroptions %}
+{% endblock %}
+{% block body %}
+{% if not saved %}
+<div id="registerdialog" class="uk-child-width-3-4@s" uk-grid>
+    <div><div class="uk-light uk-background-secondary uk-padding">
+    <form action="/main/register" method="post">
+
+
+	    <h2 class="uk-title">{% trans "Register" %}</h2>
+
+            {% csrf_token %}
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon " uk-icon="icon: file-edit"></span>
+                    {{ form.first_name }}
+                </div>
+            </div>
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon " uk-icon="icon: file-edit"></span>
+                    {{ form.last_name }}
+                </div>
+            </div>
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon " uk-icon="icon: user"></span>
+                    {{ form.username }}
+                </div>
+            </div>
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon " uk-icon="icon: lock"></span>
+                    {{ form.password }}
+                </div>
+            </div>
+            <div class="uk-margin">
+                    <span class="uk-form-icon " uk-icon="icon: plus-circle"></span>
+                    {{ form.rol }}
+            </div>
+            <div class="uk-margin">
+                    <span class="uk-form-icon " uk-icon="icon: plus-circle"></span>
+                    {{ form.language }}
+            </div>
+            <div class="uk-margin">
+                <div class="uk-inline">
+                <span  uk-icon="icon: info"></span>
+                    <p>{{ msg }}</p>
+                </div>
+            </div>
+                <div class="uk-text-right uk-margin">
+			<button class="uk-button uk-button-default" type="button">{% trans "Cancel" %}</button>
+			<button class="uk-button uk-button-primary" type="submit">{% trans "Ok" %}</button>
+                </div>
+    </form>
+    </div></div>
+</div>
+{% else %}
+            <div uk-alert class="uk-padding">
+                <a class="uk-alert-close" uk-close></a>
+                <div class="uk-form-icon " uk-icon="icon: check"></div>
+		<h3>{% trans "User request sent" %}</h3>
+            </div>
+
+{% endif %}
+{% endblock %}
+{% block jsbottom %}
+
+{% endblock %}

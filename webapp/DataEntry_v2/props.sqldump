@@ -1,0 +1,81 @@
+-- MySQL dump 10.13  Distrib 8.0.28, for Linux (x86_64)
+--
+-- Host: localhost    Database: dataEntry2
+-- ------------------------------------------------------
+-- Server version	8.0.28-0ubuntu0.20.04.3
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `campaigns_properties`
+--
+
+DROP TABLE IF EXISTS `campaigns_properties`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `campaigns_properties` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `identifier` varchar(2) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `campaigns_properties`
+--
+
+LOCK TABLES `campaigns_properties` WRITE;
+/*!40000 ALTER TABLE `campaigns_properties` DISABLE KEYS */;
+INSERT INTO `campaigns_properties` VALUES (88,'B1'),(89,'B2'),(90,'B3'),(91,'B4'),(92,'B5'),(93,'A1'),(94,'C1'),(95,'C2'),(96,'C3'),(97,'C4'),(98,'O1'),(99,'O2'),(100,'I1'),(101,'M1'),(102,'M2'),(103,'M3'),(104,'V1'),(105,'R1'),(106,'F1'),(107,'C5'),(108,'L1'),(109,'L2'),(110,'O3'),(111,'I2');
+/*!40000 ALTER TABLE `campaigns_properties` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `campaigns_properties_translation`
+--
+
+DROP TABLE IF EXISTS `campaigns_properties_translation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `campaigns_properties_translation` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `language_code` varchar(15) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `master_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `campaigns_properties_tra_language_code_master_id_04469f17_uniq` (`language_code`,`master_id`),
+  KEY `campaigns_properties_master_id_bbdcb23e_fk_campaigns` (`master_id`),
+  KEY `campaigns_properties_translation_language_code_89141a7e` (`language_code`),
+  CONSTRAINT `campaigns_properties_master_id_bbdcb23e_fk_campaigns` FOREIGN KEY (`master_id`) REFERENCES `campaigns_properties` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=436 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `campaigns_properties_translation`
+--
+
+LOCK TABLES `campaigns_properties_translation` WRITE;
+/*!40000 ALTER TABLE `campaigns_properties_translation` DISABLE KEYS */;
+INSERT INTO `campaigns_properties_translation` VALUES (340,'en','ByPass by Value: Jump depending on list value (YES)',88),(341,'fr','ByPass en fonction de la valeur : Sauter en fonction de la valeur de la liste (OUI) ',88),(342,'de','ByPass by Value: Springen in Abhängigkeit vom Listenwert (YES)',88),(343,'es','ByPass por valor: Saltar en función del valor de la lista (SÍ)',88),(344,'en','ByPass by Value: Jump depending on list value (NO)',89),(345,'fr','ByPass par valeur : Sauter en fonction de la valeur de la liste (NON) ',89),(346,'de','ByPass by Value: Abhängig vom Listenwert springen (NEIN)',89),(347,'es','ByPass por valor: Saltar según valor en lista (NO)',89),(348,'en','ByPass : Jump always',90),(349,'fr','ByPass : Sauter toujours',90),(350,'de','ByPass: Springen immer',90),(351,'es','ByPass: Saltar siempre',90),(352,'en','ByPass Blank: Jump if field is not in blank',91),(353,'fr','ByPass vierge : Sauter si le champ n\'est pas en blanc',91),(354,'de','ByPass Blank: Springen, wenn das Feld nicht leer ist',91),(355,'es','ByPass en Blanco: Salta si el campo no está en blanco',91),(356,'en','ByPass Screen: Jump to another page',92),(357,'fr','ByPass Ecran : Sauter à une autre page',92),(358,'de','ByPass Bildschirm: Zu einer anderen Seite springen',92),(359,'es','ByPass Pantalla: Saltar a otra página',92),(360,'en','Alpha Adjust: Alphanumeric adjust.',93),(361,'fr','Alpha Adjust : Ajustement alphanumérique',93),(362,'de','Alpha-Anpassung: Alphanumerische Anpassung',93),(363,'es','Ajuste alfanumérico: Ajuste alfanumérico',93),(364,'en','identifier Select: Written code selects text in another field',94),(365,'fr','Identifiant Select : Le code écrit sélectionne le texte dans un autre champ',94),(366,'de','Kennung auswählen: Schriftlicher Code wählt Text in einem anderen Feld aus',94),(367,'es','Identificador Seleccionar: El código escrito selecciona el texto en otro campo',94),(368,'en','identifier Select: Text selects code',95),(369,'fr','identifiant Select : Le texte sélectionne le code',95),(370,'de','Bezeichner auswählen: Text wählt Code aus',95),(371,'es','identificador Seleccionar: El texto selecciona el código',95),(372,'en','identifier Select: Automatic selection from dropdown.',96),(373,'fr','identificateur Select : Sélection automatique à partir d\'une liste déroulante',96),(374,'de','Bezeichner Auswählen: Automatische Auswahl aus Dropdown',96),(375,'es','identificador Seleccionar: Selección automática desde el desplegable',96),(376,'en','identifier Select: List mode. If value dont exist, its created in list.',97),(377,'fr','identificateur Select : Mode liste. Si la valeur n\'existe pas, elle est créée dans la liste.',97),(378,'de','Bezeichner Auswählen: Listenmodus. Wenn der Wert nicht existiert, wird er in der Liste erstellt.',97),(379,'es','identificador Seleccionar: Modo lista. Si el valor no existe, se crea en la lista',97),(380,'en','OCR: Number or Text.',98),(381,'fr','OCR : Nombre ou Texte.',98),(382,'de','OCR: Zahl oder Text.',98),(383,'es','OCR: Número o Texto',98),(384,'en','OCR: BarCode.',99),(385,'fr','OCR : Code barre.',99),(386,'de','OCR: BarCode.',99),(387,'es','OCR: Código de barras',99),(388,'en','Image: Selected Image Area on screen for data entry.',100),(389,'fr','Image : Image sélectionnée Zone de l\'écran pour la saisie de données.',100),(390,'de','Bild: Ausgewählter Bildbereich auf dem Bildschirm für die Dateneingabe.',100),(391,'es','Imagen: Área de imagen seleccionada en la pantalla para la entrada de datos',100),(392,'en','Alphanumeric Mask: Alphanumeric Mask.',101),(393,'fr','Masque Alphanumérique : Masque alphanumérique.',101),(394,'de','Alphanumerische Maske: Alphanumerische Maske.',101),(395,'es','Máscara alfanumérica: Máscara alfanumérica',101),(396,'en','Numeric Mask: Numeric Mask.',102),(397,'fr','Masque Numérique : Masque Numérique.',102),(398,'de','Numerische Maske: Numerische Maske.',102),(399,'es','Máscara numérica: Máscara numérica',102),(400,'en','Alphanumeric Mask sprintf: C sprintf texts and numeric transformation.',103),(401,'fr','Masque alphanumérique sprintf : Textes sprintf en C et transformation numérique.',103),(402,'de','Alphanumerische Maske: sprintf: C sprintf Texte und numerische Transformation.',103),(403,'es','Máscara alfanumérica sprintf: C sprintf textos y transformación numérica',103),(404,'en','To Be verified: Field to VERIFY N times.',104),(405,'fr','To Be Verified : Champ à VERIFIER N fois.',104),(406,'de','To Be verified: N-mal zu VERIFYendes Feld.',104),(407,'es','A verificar: Campo a VERIFICAR N veces',104),(408,'en','Required: Required field.',105),(409,'fr','Obligatoire : Champ obligatoire.',105),(410,'de','Erforderlich: Erforderliches Feld.',105),(411,'es','Requerido: Campo obligatorio',105),(412,'en','FillAll: FILL FIELD completely.',106),(413,'fr','FillAll : Remplir entièrement le champ.',106),(414,'de','FillAll: FILL FIELD vollständig ausfüllen.',106),(415,'es','FillAll: Rellenar completamente el campo',106),(416,'en','ListShowText: Grabs code, show text in LIST.',107),(417,'fr','ListShowText : Saisit le code, affiche le texte dans la LISTE.',107),(418,'de','ListShowText: Greift Code, zeigt Text in LISTE.',107),(419,'es','ListShowText: Agarra el código, muestra el texto en la LISTA',107),(420,'en','MinValue: Integer MINimum value accepted.',108),(421,'fr','MinValue : Integer MINimum value accepted.',108),(422,'de','MinValue: Ganzzahliger MINIMALER akzeptierter Wert.',108),(423,'es','MinValue: Valor mínimo entero aceptado',108),(424,'en','MaxValue: Integer MAXimum value accepted.',109),(425,'fr','MaxValue : Integer MAXimum value accepted.',109),(426,'de','MaxValue: Ganzzahliger MAXimalwert, der akzeptiert wird.',109),(427,'es','MaxValue: Valor maximo entero aceptado.',109),(428,'en','FillOR: Fill field or the selected field.',110),(429,'fr','FillOR : Remplir le champ ou le champ sélectionné.',110),(430,'de','FillOR: Füllt das Feld oder das ausgewählte Feld.',110),(431,'es','FillOR: Rellena el campo o el campo seleccionado',110),(432,'en','ImgPath: Image Path in field',111),(433,'fr','ImgPath : Chemin de l\'image dans le champ',111),(434,'de','ImgPath: Bildpfad im Feld',111),(435,'es','ImgPath: Ruta de la imagen en el campo',111);
+/*!40000 ALTER TABLE `campaigns_properties_translation` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-05-02 21:00:46

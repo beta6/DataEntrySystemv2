@@ -1,0 +1,112 @@
+{% extends "main/baselogged.html" %}
+{% load i18n %}
+{% block js %}
+<script src="/st/js/jquery.min.js"></script>
+{% endblock %}
+{% block body %}
+<div class="uk-section uk-section-muted uk-dark">
+<div  class="uk-container">
+<table id="users_table" class="uk-table uk-table-small uk-table-divider uk-table-responsive uk-table-hover">
+    <thead>
+        <tr>
+            <td>&nbsp;</td>
+    {% for field in fields %}
+            <td>{{ field }}</td>
+    {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+
+    {% for user in users %}
+        <tr id="{{ user.id }}">
+            <td><a class="uk-button uk-button-default" href="#modal-sections" uk-toggle uk-icon="icon: file-edit"></a></td>
+            <td>{{ user.user.username }}</td>
+            <td>{{ user.rol }}</td>
+            <td>{{ user.user.first_name }}</td>
+            <td>{{ user.user.last_name }}</td>
+	    <td>{% if user.user.is_active %} {% trans "Yes" %} {% else %} {% trans "No" %} {% endif %}</td>
+            <td>{{ user.user.date_joined }}</td>
+            <td>{{ user.user.last_login }}</td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+
+<div id="modal-sections" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title"></h2>
+        </div>
+        <div class="uk-modal-body">
+            <form id="frmuser" action="/main/user" method="post" class="uk-form-stacked">
+
+                {{ form.id }}
+                <div class="uk-margin">
+                    <div class="uk-form-controls">
+                    {{ form.rol }}
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <div class="uk-form-controls">
+                        {{ form.first_name }}
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <div class="uk-form-controls">
+                        {{ form.last_name }}
+                    </div>
+                </div>
+
+            <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                 <div class="uk-form-controls">
+			 {{ form.is_active }} {% trans "Active" %}
+                 </div>
+            </div>
+
+        <div class="uk-modal-footer uk-text-right">
+		<button class="uk-button uk-button-default uk-modal-close" type="button">{% trans "Cancel" %}</button>
+		<button id="btnsave" class="uk-button uk-button-primary" type="submit">{% trans "Save" %}</button>
+        </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+{% endblock %}
+{% block jsbottom %}
+<script>
+
+$(document).ready(function(){
+    var users_table=$("tr").slice(1).click(function(ev){ 
+        ev.preventDefault();
+        $("#id_id").val($(this).attr("id"));
+        $("#modal-sections h2").html($(this).children("td").slice(1, 2).text())
+        $(this).children("td").slice(3,5).each(function(index,td){
+           $("#modal-sections input.uk-input").slice(index, index+1).val($(td).text());
+        });
+        
+        var abrv=$(this).children("td").slice(2,3).text().trim();
+
+        $("#id_rol").val(abrv);
+        if($(this).children("td").slice(5,6).text().trim()=="Yes"){
+            $("#ckactive").attr("checked", "checked");
+        } else {
+            $("#ckactive").removeAttr("checked");
+        }
+        $("#frmuser").on("submit", function(){
+            ev.preventDefault();
+            UIkit.modal("#modal-sections").hide();
+            $(this).prop("disabled",false);
+            return true;
+        });
+            UIkit.modal("#modal-sections").show();
+            });
+            });
+
+</script>
+{% endblock %}
